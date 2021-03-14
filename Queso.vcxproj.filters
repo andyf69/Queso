@@ -44,9 +44,6 @@
     <ClCompile Include="CImportCSV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CMoney.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,9 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImportCSV.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CMoney.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CSettings.h">

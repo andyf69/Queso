@@ -1,5 +1,4 @@
 #include "CMainWindow.h"
-#include "CMoney.h"
 #include <QtCore/QDebug>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
@@ -11,9 +10,7 @@ int main(int argc, char *argv[])
     a.setOrganizationName("Feeping Widgets");
     a.setApplicationName("Queso");
 
-    CMoney::unit_test();
-
-    const QString oConnectionString("DRIVER={SQL SERVER};SERVER=.\\SQLExpress;Integrated Security=true;DATABASE=Peso;Trusted_Connection=true;");
+    const QString oConnectionString("DRIVER={SQL SERVER};SERVER=.\\SQLExpress;Integrated Security=true;DATABASE=Queso;Trusted_Connection=true;");
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName(oConnectionString);
     if (!db.open())

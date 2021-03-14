@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Queso", "Queso.vcxproj", "{87737505-D50E-4106-8B7E-E7522520F206}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{2C81688E-20B3-4C66-8639-FF04652A3022}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{87737505-D50E-4106-8B7E-E7522520F206}.Debug|x64.Build.0 = Debug|x64
 		{87737505-D50E-4106-8B7E-E7522520F206}.Release|x64.ActiveCfg = Release|x64
 		{87737505-D50E-4106-8B7E-E7522520F206}.Release|x64.Build.0 = Release|x64
+		{2C81688E-20B3-4C66-8639-FF04652A3022}.Debug|x64.ActiveCfg = Debug|x64
+		{2C81688E-20B3-4C66-8639-FF04652A3022}.Debug|x64.Build.0 = Debug|x64
+		{2C81688E-20B3-4C66-8639-FF04652A3022}.Release|x64.ActiveCfg = Release|x64
+		{2C81688E-20B3-4C66-8639-FF04652A3022}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

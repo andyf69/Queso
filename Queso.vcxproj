@@ -13,8 +13,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{87737505-D50E-4106-8B7E-E7522520F206}</ProjectGuid>
     <Keyword>QtVS_v303</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -47,12 +47,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>Qt5.15.0</QtInstall>
+    <QtInstall>5.15.2</QtInstall>
     <QtModules>core;gui;sql;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>Qt5.15.0</QtInstall>
+    <QtInstall>5.15.2</QtInstall>
     <QtModules>core;gui;sql;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -92,7 +92,6 @@
     <ClCompile Include="CImportCSV.cpp" />
     <ClCompile Include="CImportQIF.cpp" />
     <ClCompile Include="CMainWindow.cpp" />
-    <ClCompile Include="CMoney.cpp" />
     <ClCompile Include="CSettings.cpp" />
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="main.cpp" />
@@ -100,7 +99,6 @@
   <ItemGroup>
     <ClInclude Include="CImportCSV.h" />
     <ClInclude Include="CImportQIF.h" />
-    <ClInclude Include="CMoney.h" />
     <ClInclude Include="CSettings.h" />
     <ClInclude Include="Decimal.h" />
   </ItemGroup>

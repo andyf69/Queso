@@ -286,7 +286,7 @@ namespace dec
 
 		int sign() const { return (m_value > 0) ? 1 : ((m_value < 0) ? -1 : 0); }
 
-		double getAsDouble() const { return static_cast<double>(m_value) / getPrecFactorDouble(); }
+		double asDouble() const { return static_cast<double>(m_value) / getPrecFactorDouble(); }
 		void setAsDouble(double value) { m_value = fpToStorage(value); }
 
 		// returns integer value = real_value * (10 ^ precision)
