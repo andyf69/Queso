@@ -84,7 +84,7 @@ bool dec::div_rounded(int64_t& output, int64_t a, int64_t b)
 }
 
 // result = (value1 * value2) / divisor
-inline int64_t dec_utils::multDiv(const int64_t value1, const int64_t value2, int64_t divisor)
+int64_t dec_utils::multDiv(const int64_t value1, const int64_t value2, int64_t divisor)
 {
 	// we don't check for division by zero, the caller should - the next line will throw.
 	const int64_t value1int = value1 / divisor;

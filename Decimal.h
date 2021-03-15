@@ -39,7 +39,7 @@ namespace dec
 	{
 	public:
 		// result = (value1 * value2) / divisor
-		inline static int64_t multDiv(const int64_t value1, const int64_t value2, int64_t divisor);
+		static int64_t multDiv(const int64_t value1, const int64_t value2, int64_t divisor);
 	};
 
 	template<int Prec>
@@ -288,6 +288,35 @@ namespace dec
 
 		double asDouble() const { return static_cast<double>(m_value) / getPrecFactorDouble(); }
 		void setAsDouble(double value) { m_value = fpToStorage(value); }
+
+		std::string asString() const
+		{
+			int64_t before, after;
+			unpack(before, after);
+			int sign = 1;
+
+			if (before < 0)
+			{
+				sign = -1;
+				before = -before;
+			}
+
+			if (after < 0)
+			{
+				sign = -1;
+				after = -after;
+			}
+
+			std::stringstream output;
+			if (sign < 0)
+				output << "-";
+
+			output << before;
+
+			if (Prec > 0)
+				output << '.' << std::setw(Prec) << std::setfill('0') << std::right << after;
+			return output.str();
+		}
 
 		// returns integer value = real_value * (10 ^ precision)
 		// use to load/store decimal value in external memory
