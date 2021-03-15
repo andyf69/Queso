@@ -7,8 +7,6 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-#define MSG(msg) [&]{ std::stringstream _s; _s << msg; return _s.str(); }()
-
 namespace UnitTests
 {
 	TEST_CLASS(DecimalTests)
