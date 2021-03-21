@@ -95,10 +95,10 @@ bool CImportCSV::import(const QString& oFileName)
 
 bool CImportCSV::importRow(const std::vector<QString>& row)
 {
-    if (row.size() != 11)
+    if (row.size() != 13)
         return false;
 
-    // Transaction ID, Posting Date, Effective Date, Transaction Type, Amount, Check Number, Reference Number, Description, Transaction Category, Type, Balance
+    // Transaction ID, Posting Date, Effective Date, Transaction Type, Amount, Check Number, Reference Number, Description, Transaction Category, Type, Balance, Memo, Extended Description
     const QString& oTransId = row[0];
     if (isTransactionImportedAlready(oTransId))
         return false;
@@ -133,14 +133,17 @@ bool CImportCSV::importRow(const std::vector<QString>& row)
     if (oDateSeq.size() == 12)
         iSeqNum = oDateSeq.right(4).toShort();
 
+    const QString& oMemo = row[11];
+    const QString& oExtendedDescription = row[12];
+
     //qDebug() << oCheckNo << oCheckNo.size() << oCheckNo.isEmpty() << oCheckNo.isNull();
     //qDebug() << oTidDate << " ACCT:" << iFIAcctNum << " Cents:" << oCents << " Seq:" << iSeqNum;
     //qDebug() /*<< "ID:" << oTransId*/ << " PD:" << oPostingDate << " ED:" << oEffectiveDate << " TT:" << oTransType << " AM:" << oAmount << " CN:" << oCheckNo
     //    << " RN:" << oRefNo << " DE:" << oDescription << " TC:" << oTransCat << " TY:" << oType << " BA:" << oBalance;
 
     QSqlQuery q;
-    q.prepare("INSERT INTO FITransaction (TransactionId, PostingDate, EffectiveDate, SequenceNum, FIAccountNum, CheckNumber, ReferenceNumber, Description, TransactionCategory, Type, Amount, Balance) "
-        "VALUES(:transid, :pd, :ed, :seq, :fiacct, :chk, :ref, :desc, :cat, :type, :amt, :bal)");
+    q.prepare("INSERT INTO FITransaction (TransactionId, PostingDate, EffectiveDate, SequenceNum, FIAccountNum, CheckNumber, ReferenceNumber, Description, TransactionCategory, Type, Amount, Balance, Memo, ExtendedDescription) "
+        "VALUES(:transid, :pd, :ed, :seq, :fiacct, :chk, :ref, :desc, :cat, :type, :amt, :bal, :memo, :extdesc)");
     q.bindValue(":transid", oTransId);
     q.bindValue(":pd", oPostingDate.toString(Qt::ISODate));
     q.bindValue(":ed", oEffectiveDate.toString(Qt::ISODate));
@@ -153,6 +156,8 @@ bool CImportCSV::importRow(const std::vector<QString>& row)
     q.bindValue(":type", oType.isEmpty() ? QVariant() : oType);
     q.bindValue(":amt", oAmount);
     q.bindValue(":bal", oBalance);
+    q.bindValue(":memo", oMemo);
+    q.bindValue(":extdesc", oExtendedDescription);
 
     if (q.exec())
         qDebug() << "Success";

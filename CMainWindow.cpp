@@ -4,10 +4,7 @@
 #include "CSettings.h"
 
 #include <QtCore/QDebug>
-//#include <QtCore/QFile>
-//#include <QtCore/QTextStream>
 #include <QtSql/QSqlDatabase>
-//#include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRelationalDelegate>
 #include <QtSql/QSqlRelationalTableModel>
