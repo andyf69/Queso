@@ -142,7 +142,20 @@ void CMainWindow::onImportQIF()
     {
         oSettings.setImportQIFPath(QFileInfo(oFileName).path());
         CImportQIF oImporter;
-        oImporter.import(oFileName);
+        if (oImporter.import(oFileName))
+        {
+            qDebug() << "Successfully read QIF file";
+            qDebug() << "Bank Transactions:" << oImporter.bankTransactions().size();
+            qDebug() << "Cash Transactions:" << oImporter.cashTransactions().size();
+            qDebug() << "Credit Card Transactions:" << oImporter.creditCardTransactions().size();
+            qDebug() << "Investment Transactions:" << oImporter.investmentTransactions().size();
+            qDebug() << "Other Asset Transactions:" << oImporter.otherAssetTransactions().size();
+            qDebug() << "Other Liability Transactions:" << oImporter.otherLiabilityTransactions().size();
+            qDebug() << "Accounts:" << oImporter.accounts().size();
+            qDebug() << "Categories:" << oImporter.categories().size();
+            qDebug() << "Classes:" << oImporter.classes().size();
+            qDebug() << "Memorized:" << oImporter.memorized().size();
+        }
     }
 }
 
