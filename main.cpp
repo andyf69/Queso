@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
         qDebug() << db.lastError().text();
         return -1;
     }
+    db.setNumericalPrecisionPolicy(QSql::HighPrecision);
 
     CMainWindow w;
     w.show();
