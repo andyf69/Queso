@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>872</width>
+    <width>794</width>
     <height>616</height>
    </rect>
   </property>
@@ -20,45 +20,54 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="m_pCreatePBtn">
-        <property name="text">
-         <string>Create</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_pReadPBtn">
-        <property name="text">
-         <string>Read</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_pUpdatePBtn">
-        <property name="text">
-         <string>Update</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_pDeletePBtn">
-        <property name="text">
-         <string>Delete</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <widget class="QListWidget" name="m_pListWidget"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QTableView" name="m_pTableView">
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
+     <widget class="QSplitter" name="m_pLeftSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QListView" name="m_pAccountsListView"/>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="m_pCreatePBtn">
+            <property name="text">
+             <string>Create</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pReadPBtn">
+            <property name="text">
+             <string>Read</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pUpdatePBtn">
+            <property name="text">
+             <string>Update</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_pDeletePBtn">
+            <property name="text">
+             <string>Delete</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="m_pTableView">
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -68,7 +77,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>872</width>
+     <width>794</width>
      <height>21</height>
     </rect>
    </property>
@@ -81,7 +90,14 @@
     <addaction name="separator"/>
     <addaction name="m_pActionExit"/>
    </widget>
+   <widget class="QMenu" name="m_pMenuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="m_pActionAccountList"/>
+   </widget>
    <addaction name="m_pMenuFile"/>
+   <addaction name="m_pMenuEdit"/>
   </widget>
   <widget class="QToolBar" name="m_pMainToolBar">
    <attribute name="toolBarArea">
@@ -105,6 +121,11 @@
   <action name="m_pActionImportQIF">
    <property name="text">
     <string>Import QIF...</string>
+   </property>
+  </action>
+  <action name="m_pActionAccountList">
+   <property name="text">
+    <string>Account List...</string>
    </property>
   </action>
  </widget>

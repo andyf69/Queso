@@ -12,15 +12,25 @@ public:
 
 private:
     void initMenuActions();
+    void initAccountList(QListView* pListView);
 
     void onImportCSV();
     void onImportQIF();
     void onExit();
 
+    void onAccountList();
+
     void onCreate();
     void onRead();
     void onUpdate();
     void onDelete();
+
+    void onAccountActivated(const QModelIndex& index);
+
+    virtual void closeEvent(QCloseEvent* pEvent);
+
+    void saveStateSettings();
+    void restoreStateSettings();
 
     Ui::CMainWindowClass ui;
 };
