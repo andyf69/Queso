@@ -22,6 +22,9 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="Source Files\Account List">
+      <UniqueIdentifier>{97e38639-02ea-4e4b-8e2a-b4b3880e4f45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="CMainWindow.qrc">
@@ -53,6 +56,12 @@
     <ClCompile Include="Decimal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CAccountListDelegate.cpp">
+      <Filter>Source Files\Account List</Filter>
+    </ClCompile>
+    <ClCompile Include="CAccountListModel.cpp">
+      <Filter>Source Files\Account List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImportCSV.h">
@@ -66,6 +75,12 @@
     </ClInclude>
     <ClInclude Include="Decimal.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAccountListDelegate.h">
+      <Filter>Source Files\Account List</Filter>
+    </ClInclude>
+    <ClInclude Include="CAccountListModel.h">
+      <Filter>Source Files\Account List</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

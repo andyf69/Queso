@@ -1,0 +1,14 @@
+#pragma once
+#include <QtWidgets/QStyledItemDelegate>
+
+class CAccountListDelegate : public QStyledItemDelegate
+{
+public:
+    explicit CAccountListDelegate(QObject* pParent = nullptr) : QStyledItemDelegate(pParent) {}
+    ~CAccountListDelegate() = default;
+
+protected:
+    virtual void paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+};
+
