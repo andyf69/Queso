@@ -38,7 +38,7 @@ CMainWindow::CMainWindow()
     ui.m_pTableView->setItemDelegate(new QSqlRelationalDelegate(ui.m_pTableView));
     ui.m_pTableView->setAlternatingRowColors(true);
 
-    initAccountList(ui.m_pAccountsListView);
+    initAccountList(ui.m_pAccountsTreeView);
 }
 
 void CMainWindow::initMenuActions()
@@ -54,22 +54,27 @@ void CMainWindow::initMenuActions()
     QObject::connect(ui.m_pDeletePBtn, &QPushButton::clicked, this, &CMainWindow::onDelete);
 }
 
-void CMainWindow::initAccountList(QListView* pListView)
+void CMainWindow::initAccountList(QTreeView* pTreeView)
 {
-    pListView->setItemDelegate(new CAccountListDelegate(pListView));
-    pListView->setModel(new CAccountListModel(pListView));
-    pListView->setModelColumn(0);
-    pListView->setAlternatingRowColors(true);
-
-    QObject::connect(pListView, &QListView::activated, this, &CMainWindow::onAccountActivated);
+    pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
+    pTreeView->setModel(new CAccountListModel(pTreeView));
+    pTreeView->setHeaderHidden(true);
+    pTreeView->setRootIsDecorated(false);
+    pTreeView->setItemsExpandable(false); // stop the user from expanding/collapsing the tree nodes
+    pTreeView->setAlternatingRowColors(true);
+    pTreeView->setIndentation(0);
+    pTreeView->resizeColumnToContents(0);
+    pTreeView->resizeColumnToContents(1);
+    pTreeView->expandAll();
+    QObject::connect(pTreeView, &QTreeView::activated, this, &CMainWindow::onAccountActivated);
 }
 
 void CMainWindow::onAccountActivated(const QModelIndex& index)
 {
     const CAccountListModel* pModel = static_cast<const CAccountListModel*>(index.model());
-    int iAccountId = pModel->accountId(index.row());
-    QString oName = pModel->accountName(index.row());
-    QString oInstitution = pModel->InstitutionName(index.row());
+    int iAccountId = pModel->accountId(index);
+    QString oName = pModel->accountName(index);
+    QString oInstitution = pModel->InstitutionName(index);
 
     qDebug() << iAccountId << oName << oInstitution;
 }

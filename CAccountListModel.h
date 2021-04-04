@@ -1,15 +1,16 @@
 #pragma once
-#include <QtSql/QSqlQueryModel>
+#include <QtGui/QStandardItemModel>
 
-class CAccountListModel : public QSqlQueryModel
+class CAccountListModel : public QStandardItemModel
 {
 public:
 	explicit CAccountListModel(QObject* pParent = nullptr);
 	~CAccountListModel() = default;
-
-	int accountId(int iRow) const;
-	int accountTypeId(int iRow) const;
-	QString accountName(int iRow) const;
-	QString InstitutionName(int iRow) const;
+	
+	int accountId(const QModelIndex& oIndex) const;
+	int accountTypeId(const QModelIndex& oIndex) const;
+	QString accountName(const QModelIndex& oIndex) const;
+	QString InstitutionName(const QModelIndex& oIndex) const;
 };
+
 

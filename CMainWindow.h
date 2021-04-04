@@ -12,7 +12,7 @@ public:
 
 private:
     void initMenuActions();
-    void initAccountList(QListView* pListView);
+    void initAccountList(QTreeView* pTreeView);
 
     void onImportCSV();
     void onImportQIF();

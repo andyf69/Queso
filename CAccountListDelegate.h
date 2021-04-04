@@ -9,6 +9,5 @@ public:
 
 protected:
     virtual void paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 };
 

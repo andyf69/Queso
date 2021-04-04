@@ -56,10 +56,10 @@
     <ClCompile Include="Decimal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CAccountListDelegate.cpp">
+    <ClCompile Include="CAccountListModel.cpp">
       <Filter>Source Files\Account List</Filter>
     </ClCompile>
-    <ClCompile Include="CAccountListModel.cpp">
+    <ClCompile Include="CAccountListDelegate.cpp">
       <Filter>Source Files\Account List</Filter>
     </ClCompile>
   </ItemGroup>

@@ -24,7 +24,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QListView" name="m_pAccountsListView"/>
+      <widget class="QTreeView" name="m_pAccountsTreeView"/>
       <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
