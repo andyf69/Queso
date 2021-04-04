@@ -1,4 +1,5 @@
 #include "CMainWindow.h"
+#include "CAccount.h"
 #include "CAccountListDelegate.h"
 #include "CAccountListModel.h"
 #include "CImportCSV.h"
@@ -26,7 +27,6 @@ CMainWindow::CMainWindow()
 
     QSqlRelationalTableModel* pModel = new QSqlRelationalTableModel(this, db);
     pModel->setTable("Account");
-    pModel->setRelation(3, QSqlRelation("AccountType", "id", "Name"));
     pModel->setRelation(4, QSqlRelation("FinancialInstitution", "id", "Name"));
     bool ok = pModel->select();
     pModel->setHeaderData(0, Qt::Horizontal, tr("Id"));
@@ -73,10 +73,19 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
 {
     const CAccountListModel* pModel = static_cast<const CAccountListModel*>(index.model());
     int iAccountId = pModel->accountId(index);
+    if (iAccountId == 0)
+        return;
+
+    int iAccountTypeId = pModel->accountTypeId(index);
     QString oName = pModel->accountName(index);
     QString oInstitution = pModel->InstitutionName(index);
 
     qDebug() << iAccountId << oName << oInstitution;
+    switch (static_cast<CAccount::Type>(iAccountTypeId))
+    {
+    default:
+        break;
+    }
 }
 
 void CMainWindow::closeEvent(QCloseEvent* pEvent)

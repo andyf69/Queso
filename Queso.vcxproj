@@ -89,6 +89,7 @@
     <QtRcc Include="CMainWindow.qrc" />
     <QtUic Include="CMainWindow.ui" />
     <QtMoc Include="CMainWindow.h" />
+    <ClCompile Include="CAccount.cpp" />
     <ClCompile Include="CAccountListDelegate.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
     <ClCompile Include="CImportCSV.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CAccount.h" />
     <ClInclude Include="CAccountListDelegate.h" />
     <ClInclude Include="CAccountListModel.h" />
     <ClInclude Include="CImportCSV.h" />

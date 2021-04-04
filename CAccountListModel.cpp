@@ -1,4 +1,5 @@
 #include "CAccountListModel.h"
+#include "CAccount.h"
 #include <QtSql/QSqlQuery>
 
 namespace
@@ -13,12 +14,11 @@ CAccountListModel::CAccountListModel(QObject* pParent)
 
     QSqlQuery q;
     q.prepare("SELECT [Account].[Id]"
+              ", [Account].[AccountTypeId]"
               ", [Account].[Name]"
               ", [FinancialInstitution].[Name] AS 'Institution'"
-              ", [AccountType].[DisplayName]"
               "FROM [Account]"
               "LEFT JOIN [FinancialInstitution] ON [Account].[FinancialInstitutionId] = [FinancialInstitution].[Id]"
-              "LEFT JOIN [AccountType] ON [Account].[AccountTypeId] = [AccountType].[Id]"
               "WHERE [Hidden] = 0"
               "ORDER BY [Account].[AccountTypeId], [FinancialInstitution].[Name], [Account].[Name]");
     if (q.exec())
@@ -28,7 +28,8 @@ CAccountListModel::CAccountListModel(QObject* pParent)
         QStandardItem* pGroupItem = nullptr;
         while (q.next())
         {
-            QString oGroup = q.value("DisplayName").toString();
+            int iAccountTypeId = q.value("AccountTypeId").toInt();
+            QString oGroup = CAccount::typeToDisplayName(static_cast<CAccount::Type>(iAccountTypeId));
             if (!pGroupItem || oGroup != pGroupItem->text())
             {
                 pGroupItem = new QStandardItem(oGroup);
