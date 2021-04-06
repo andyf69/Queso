@@ -1,7 +1,9 @@
 #include "CMainWindow.h"
 #include "CAccount.h"
 #include "CAccountListDelegate.h"
+#include "CAccountListEditorDlg.h"
 #include "CAccountListModel.h"
+#include "CFinancialInstitution.h"
 #include "CImportCSV.h"
 #include "CImportQIF.h"
 #include "CSettings.h"
@@ -57,7 +59,7 @@ void CMainWindow::initMenuActions()
 void CMainWindow::initAccountList(QTreeView* pTreeView)
 {
     pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
-    pTreeView->setModel(new CAccountListModel(pTreeView));
+    pTreeView->setModel(new CAccountListModel(false, pTreeView));
     pTreeView->setHeaderHidden(true);
     pTreeView->setRootIsDecorated(false);
     pTreeView->setItemsExpandable(false); // stop the user from expanding/collapsing the tree nodes
@@ -76,13 +78,31 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
     if (iAccountId == 0)
         return;
 
-    int iAccountTypeId = pModel->accountTypeId(index);
-    QString oName = pModel->accountName(index);
-    QString oInstitution = pModel->InstitutionName(index);
+    CAccount oAccount;
+    if (!oAccount.dbRead(iAccountId))
+        return;
+
+    CAccount::Type eAccountType = oAccount.accountType();
+    QString oName = oAccount.name();
+    int iFinancialInstitutionId = oAccount.financialInstitutionId();
+
+    CFinancialInstitution oFI;
+    oFI.dbRead(iFinancialInstitutionId);
+    QString oInstitution = oFI.name();
 
     qDebug() << iAccountId << oName << oInstitution;
-    switch (static_cast<CAccount::Type>(iAccountTypeId))
+    switch (eAccountType)
     {
+    case CAccount::Type::Banking:
+        break;
+    case CAccount::Type::Investment:
+        break;
+    case CAccount::Type::Retirement:
+        break;
+    case CAccount::Type::Asset:
+        break;
+    case CAccount::Type::Liability:
+        break;
     default:
         break;
     }
@@ -227,4 +247,6 @@ void CMainWindow::onExit()
 void CMainWindow::onAccountList()
 {
     qDebug() << "onAccountList: TODO";
+    CAccountListEditorDlg dlg(this);
+    dlg.exec();
 }

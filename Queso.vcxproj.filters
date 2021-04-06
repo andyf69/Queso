@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Account List">
       <UniqueIdentifier>{97e38639-02ea-4e4b-8e2a-b4b3880e4f45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{0f242406-08a9-4e40-824e-072d5dbc574e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="CMainWindow.qrc">
@@ -33,9 +36,6 @@
     <QtUic Include="CMainWindow.ui">
       <Filter>Resource Files</Filter>
     </QtUic>
-    <QtMoc Include="CMainWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="CMainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,8 +62,14 @@
     <ClCompile Include="CAccountListDelegate.cpp">
       <Filter>Source Files\Account List</Filter>
     </ClCompile>
-    <ClCompile Include="CAccount.cpp">
+    <ClCompile Include="CAccountListEditorDlg.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CAccount.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CFinancialInstitution.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,13 +91,38 @@
     <ClInclude Include="CAccountListModel.h">
       <Filter>Source Files\Account List</Filter>
     </ClInclude>
-    <ClInclude Include="CAccount.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Source Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CAccount.h">
+      <Filter>Source Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CAccountListEditorDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFinancialInstitution.h">
+      <Filter>Source Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cheese.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Queso.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="CAccountListEditor.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

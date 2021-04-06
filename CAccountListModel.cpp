@@ -4,10 +4,10 @@
 
 namespace
 {
-    enum class Role { AccountId = Qt::UserRole + 1, AccountName, InstitutionName, AccountTypeId };
+    enum class Role { AccountId = Qt::UserRole + 1 };
 }
 
-CAccountListModel::CAccountListModel(QObject* pParent)
+CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
     :QStandardItemModel(pParent)
 {
     clear();
@@ -16,11 +16,9 @@ CAccountListModel::CAccountListModel(QObject* pParent)
     q.prepare("SELECT [Account].[Id]"
               ", [Account].[AccountTypeId]"
               ", [Account].[Name]"
-              ", [FinancialInstitution].[Name] AS 'Institution'"
+              ", [Account].[Hidden]"
               "FROM [Account]"
-              "LEFT JOIN [FinancialInstitution] ON [Account].[FinancialInstitutionId] = [FinancialInstitution].[Id]"
-              "WHERE [Hidden] = 0"
-              "ORDER BY [Account].[AccountTypeId], [FinancialInstitution].[Name], [Account].[Name]");
+              "ORDER BY [Account].[AccountTypeId], [Account].[Id]");
     if (q.exec())
     {
         setColumnCount(2);
@@ -28,6 +26,10 @@ CAccountListModel::CAccountListModel(QObject* pParent)
         QStandardItem* pGroupItem = nullptr;
         while (q.next())
         {
+            bool bHidden = q.value("Hidden").toBool();
+            if (bHidden && !bIncludeHidden)
+                continue;
+
             int iAccountTypeId = q.value("AccountTypeId").toInt();
             QString oGroup = CAccount::typeToDisplayName(static_cast<CAccount::Type>(iAccountTypeId));
             if (!pGroupItem || oGroup != pGroupItem->text())
@@ -50,11 +52,13 @@ CAccountListModel::CAccountListModel(QObject* pParent)
 
             QStandardItem* pNameItem = new QStandardItem(q.value("Name").toString());
             pNameItem->setEditable(false);
+            if (bIncludeHidden)
+            {
+                //pNameItem->setCheckable(true);
+                pNameItem->setCheckState(bHidden ? Qt::Checked : Qt:: Unchecked);
+            }
             pNameItem->setForeground(Qt::darkBlue);
             pNameItem->setData(q.value("Id"), static_cast<int>(Role::AccountId));
-            pNameItem->setData(q.value("AccountTypeId"), static_cast<int>(Role::AccountTypeId));
-            pNameItem->setData(q.value("Name"), static_cast<int>(Role::AccountName));
-            pNameItem->setData(q.value("Institution"), static_cast<int>(Role::InstitutionName));
 
             QStandardItem* pValueItem = new QStandardItem("$12.34"); // TODO
             pValueItem->setEditable(false);
@@ -72,19 +76,4 @@ CAccountListModel::CAccountListModel(QObject* pParent)
 int CAccountListModel::accountId(const QModelIndex& oIndex) const
 {
     return oIndex.siblingAtColumn(0).data(static_cast<int>(Role::AccountId)).toInt();
-}
-
-int CAccountListModel::accountTypeId(const QModelIndex& oIndex) const
-{
-    return oIndex.siblingAtColumn(0).data(static_cast<int>(Role::AccountTypeId)).toInt();
-}
-
-QString CAccountListModel::accountName(const QModelIndex& oIndex) const
-{
-    return oIndex.siblingAtColumn(0).data(static_cast<int>(Role::AccountName)).toString();
-}
-
-QString CAccountListModel::InstitutionName(const QModelIndex& oIndex) const
-{
-    return oIndex.siblingAtColumn(0).data(static_cast<int>(Role::InstitutionName)).toString();
 }

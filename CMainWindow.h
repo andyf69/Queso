@@ -5,8 +5,6 @@
 
 class CMainWindow : public QMainWindow
 {
-    Q_OBJECT
-
 public:
     CMainWindow();
 

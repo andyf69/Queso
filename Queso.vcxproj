@@ -87,11 +87,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="CMainWindow.qrc" />
+    <QtUic Include="CAccountListEditor.ui" />
     <QtUic Include="CMainWindow.ui" />
-    <QtMoc Include="CMainWindow.h" />
+    <ClInclude Include="CFinancialInstitution.h" />
+    <ClInclude Include="CMainWindow.h" />
     <ClCompile Include="CAccount.cpp" />
     <ClCompile Include="CAccountListDelegate.cpp" />
+    <ClCompile Include="CAccountListEditorDlg.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
+    <ClCompile Include="CFinancialInstitution.cpp" />
     <ClCompile Include="CImportCSV.cpp" />
     <ClCompile Include="CImportQIF.cpp" />
     <ClCompile Include="CMainWindow.cpp" />
@@ -102,14 +106,20 @@
   <ItemGroup>
     <ClInclude Include="CAccount.h" />
     <ClInclude Include="CAccountListDelegate.h" />
+    <ClInclude Include="CAccountListEditorDlg.h" />
     <ClInclude Include="CAccountListModel.h" />
+    <ClInclude Include="CEntity.h" />
     <ClInclude Include="CImportCSV.h" />
     <ClInclude Include="CImportQIF.h" />
     <ClInclude Include="CSettings.h" />
     <ClInclude Include="Decimal.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cheese.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Queso.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

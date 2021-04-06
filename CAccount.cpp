@@ -1,4 +1,6 @@
 #include "CAccount.h"
+#include <QtCore/QVariant>
+#include <QtSql/QSqlQuery>
 
 QString CAccount::typeToTypeName(const Type eType)
 {
@@ -38,4 +40,81 @@ QString CAccount::typeToDisplayName(const Type eType)
 		break;
 	}
 	return QString();
+}
+
+bool CAccount::dbCreate()
+{
+	QSqlQuery q;
+	q.prepare("INSERT INTO Account (Name, FIAccountId, AccountTypeId, FinancialInstitutionId, Hidden) "
+		"VALUES(:name, :fiaid, :atid, :fiid, :hidden)");
+	q.bindValue(":name", m_oName);
+	q.bindValue(":fiaid", m_iFIAccountId);
+	q.bindValue(":atid", m_iAccountTypeId);
+	q.bindValue(":fiid", m_iFinancialInstitutionId);
+	q.bindValue(":hidden", m_bHidden);
+	if (q.exec())
+	{
+		m_iId = q.lastInsertId().toInt();
+		return true;
+	}
+	return false;
+}
+
+bool CAccount::dbRead(int id)
+{
+	QSqlQuery q;
+	q.prepare("SELECT [Id]"
+		", [AccountTypeId]"
+		", [FIAccountId]"
+		", [FinancialInstitutionId]"
+		", [Name]"
+		", [Hidden]"
+		"FROM [Account]"
+		"WHERE [Id]=:id");
+	q.bindValue(":id", id);
+	if (q.exec())
+	{
+		if (q.next())
+		{
+			m_iId = id;
+			m_iAccountTypeId = q.value("AccountTypeId").toInt();
+			m_iFIAccountId = q.value("FIAccountId").toInt();
+			m_iFinancialInstitutionId = q.value("FinancialInstitutionId").toInt();
+			m_oName = q.value("Name").toString();
+			m_bHidden = q.value("Hidden").toBool();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CAccount::dbUpdate()
+{
+	QSqlQuery q;
+	q.prepare("UPDATE Account SET Name=':name'"
+		", FIAccountId=:fiaid"
+		", AccountTypeId=:atid"
+		", FinancialInstitutionId=:fiid"
+		", Hidden=:hidden"
+		"WHERE Id=:id");
+	q.bindValue(":id", m_iId);
+	q.bindValue(":name", m_oName);
+	q.bindValue(":fiaid", m_iFIAccountId);
+	q.bindValue(":atid", m_iAccountTypeId);
+	q.bindValue(":fiid", m_iFinancialInstitutionId);
+	q.bindValue(":hidden", m_bHidden);
+	if (q.exec())
+		return true;
+	return false;
+}
+
+bool CAccount::dbDelete()
+{
+	QSqlQuery q;
+	q.prepare("DELETE FROM Account WHERE Id=:id");
+	q.bindValue(":id", m_iId);
+	if (q.exec())
+		return true;
+	return false;
 }
