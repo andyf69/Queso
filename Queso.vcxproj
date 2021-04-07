@@ -89,16 +89,19 @@
     <QtRcc Include="CMainWindow.qrc" />
     <QtUic Include="CAccountListEditor.ui" />
     <QtUic Include="CMainWindow.ui" />
+    <ClInclude Include="CCategory.h" />
     <ClInclude Include="CFinancialInstitution.h" />
     <ClInclude Include="CMainWindow.h" />
     <ClCompile Include="CAccount.cpp" />
     <ClCompile Include="CAccountListDelegate.cpp" />
     <ClCompile Include="CAccountListEditorDlg.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
+    <ClCompile Include="CCategory.cpp" />
     <ClCompile Include="CFinancialInstitution.cpp" />
     <ClCompile Include="CImportCSV.cpp" />
     <ClCompile Include="CImportQIF.cpp" />
     <ClCompile Include="CMainWindow.cpp" />
+    <ClCompile Include="CPayee.cpp" />
     <ClCompile Include="CSettings.cpp" />
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="main.cpp" />
@@ -111,6 +114,7 @@
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CImportCSV.h" />
     <ClInclude Include="CImportQIF.h" />
+    <ClInclude Include="CPayee.h" />
     <ClInclude Include="CSettings.h" />
     <ClInclude Include="Decimal.h" />
     <ClInclude Include="resource.h" />
