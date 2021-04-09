@@ -86,7 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="CMainWindow.qrc" />
+    <QtRcc Include="Queso.qrc" />
     <QtUic Include="CAccountListEditor.ui" />
     <QtUic Include="CMainWindow.ui" />
     <ClInclude Include="CCategory.h" />

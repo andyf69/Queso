@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setOrganizationName("Feeping Widgets");
     a.setApplicationName("Queso");
+    a.setWindowIcon(QIcon(":/icons/cheese.ico"));
 
     const QString oConnectionString("DRIVER={SQL SERVER};SERVER=.\\SQLExpress;Integrated Security=true;DATABASE=Queso;Trusted_Connection=true;");
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");

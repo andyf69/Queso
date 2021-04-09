@@ -13,8 +13,12 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRelationalDelegate>
 #include <QtSql/QSqlRelationalTableModel>
+#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QFileDialog>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
 
 
@@ -22,8 +26,17 @@ CMainWindow::CMainWindow()
     : QMainWindow()
 {
     ui.setupUi(this);
+
+    initMenus();
+    initStatusBar();
+    initAccountList();
+
+    QObject::connect(ui.m_pCreatePBtn, &QPushButton::clicked, this, &CMainWindow::onCreate);
+    QObject::connect(ui.m_pReadPBtn, &QPushButton::clicked, this, &CMainWindow::onRead);
+    QObject::connect(ui.m_pUpdatePBtn, &QPushButton::clicked, this, &CMainWindow::onUpdate);
+    QObject::connect(ui.m_pDeletePBtn, &QPushButton::clicked, this, &CMainWindow::onDelete);
+
     restoreStateSettings();
-    initMenuActions();
 
     QSqlDatabase db = QSqlDatabase::database();
 
@@ -40,24 +53,56 @@ CMainWindow::CMainWindow()
     ui.m_pTableView->setItemDelegate(new QSqlRelationalDelegate(ui.m_pTableView));
     ui.m_pTableView->setAlternatingRowColors(true);
 
-    initAccountList(ui.m_pAccountsTreeView);
 }
 
-void CMainWindow::initMenuActions()
+void CMainWindow::initMenus()
 {
-    QObject::connect(ui.m_pActionImportCSV, &QAction::triggered, this, &CMainWindow::onImportCSV);
-    QObject::connect(ui.m_pActionImportQIF, &QAction::triggered, this, &CMainWindow::onImportQIF);
-    QObject::connect(ui.m_pActionExit, &QAction::triggered, this, &CMainWindow::onExit);
-    QObject::connect(ui.m_pActionAccountList, &QAction::triggered, this, &CMainWindow::onAccountList);
+    m_pImportCsvAction = new QAction("Import CSV...", this);
+    m_pImportQifAction = new QAction("Import QIF...", this);
+    m_pExitAction = new QAction("Exit", this);
+    m_pAccountListAction = new QAction("Account List...", this);
 
-    QObject::connect(ui.m_pCreatePBtn, &QPushButton::clicked, this, &CMainWindow::onCreate);
-    QObject::connect(ui.m_pReadPBtn, &QPushButton::clicked, this, &CMainWindow::onRead);
-    QObject::connect(ui.m_pUpdatePBtn, &QPushButton::clicked, this, &CMainWindow::onUpdate);
-    QObject::connect(ui.m_pDeletePBtn, &QPushButton::clicked, this, &CMainWindow::onDelete);
+    m_pMenuBar = new QMenuBar(this);
+
+    // Top Level Menus
+    m_pFileMenu = new QMenu("&File", m_pMenuBar);
+    m_pEditMenu = new QMenu("&Edit", m_pMenuBar);
+    m_pMenuBar->addAction(m_pFileMenu->menuAction());
+    m_pMenuBar->addAction(m_pEditMenu->menuAction());
+
+    // File Menu
+    m_pFileMenu->addAction(m_pImportCsvAction);
+    m_pFileMenu->addAction(m_pImportQifAction);
+    m_pFileMenu->addSeparator();
+    m_pFileMenu->addAction(m_pExitAction);
+
+    // Edit Menu
+    m_pEditMenu->addAction(m_pAccountListAction);
+
+    setMenuBar(m_pMenuBar);
+
+    QObject::connect(m_pImportCsvAction, &QAction::triggered, this, &CMainWindow::onImportCSV);
+    QObject::connect(m_pImportQifAction, &QAction::triggered, this, &CMainWindow::onImportQIF);
+    QObject::connect(m_pExitAction, &QAction::triggered, this, &CMainWindow::onExit);
+    QObject::connect(m_pAccountListAction, &QAction::triggered, this, &CMainWindow::onAccountList);
 }
 
-void CMainWindow::initAccountList(QTreeView* pTreeView)
+void CMainWindow::initStatusBar()
 {
+    m_pStatusBar = new QStatusBar(this);
+    setStatusBar(m_pStatusBar);
+}
+
+void CMainWindow::initAccountList()
+{
+    m_pAccountsDockWidget = new QDockWidget("Accounts", this);
+    m_pAccountsDockWidget->setObjectName("AccountsDockWidget");
+    m_pAccountsDockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    addDockWidget(Qt::LeftDockWidgetArea, m_pAccountsDockWidget);
+    QTreeView* pTreeView = new QTreeView(m_pAccountsDockWidget);
+    m_pAccountsDockWidget->setWidget(pTreeView);
+    //viewMenu->addAction(dock->toggleViewAction());
+
     pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
     pTreeView->setModel(new CAccountListModel(false, pTreeView));
     pTreeView->setHeaderHidden(true);
@@ -119,7 +164,6 @@ void CMainWindow::saveStateSettings()
     CSettings oSettings;
     oSettings.setMainWindowGeometry(saveGeometry());
     oSettings.setMainWindowState(saveState());
-    oSettings.setMainWindowVerticalSplitterState(ui.m_pLeftSplitter->saveState());
 }
 
 void CMainWindow::restoreStateSettings()
@@ -127,7 +171,6 @@ void CMainWindow::restoreStateSettings()
     CSettings oSettings;
     restoreGeometry(oSettings.mainWindowGeometry());
     restoreState(oSettings.mainWindowState());
-    ui.m_pLeftSplitter->restoreState(oSettings.mainWindowVerticalSplitterState());
 }
 
 void CMainWindow::onCreate()

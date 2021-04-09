@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/CMainWindow">
+    <qresource prefix="/icons">
         <file>cheese.ico</file>
     </qresource>
 </RCC>

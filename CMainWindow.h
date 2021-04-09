@@ -9,8 +9,9 @@ public:
     CMainWindow();
 
 private:
-    void initMenuActions();
-    void initAccountList(QTreeView* pTreeView);
+    void initMenus();
+    void initStatusBar();
+    void initAccountList();
 
     void onImportCSV();
     void onImportQIF();
@@ -31,4 +32,13 @@ private:
     void restoreStateSettings();
 
     Ui::CMainWindowClass ui;
+    QAction* m_pImportCsvAction;
+    QAction* m_pExitAction;
+    QAction* m_pImportQifAction;
+    QAction* m_pAccountListAction;
+    QMenu* m_pFileMenu;
+    QMenu* m_pEditMenu;
+    QMenuBar* m_pMenuBar;
+    QStatusBar* m_pStatusBar;
+    QDockWidget* m_pAccountsDockWidget;
 };

@@ -30,7 +30,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="CMainWindow.qrc">
+    <QtRcc Include="Queso.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
     <QtUic Include="CMainWindow.ui">

@@ -6,128 +6,68 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>794</width>
-    <height>616</height>
+    <width>1016</width>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Queso</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="CMainWindow.qrc">
-    <normaloff>:/CMainWindow/cheese.ico</normaloff>:/CMainWindow/cheese.ico</iconset>
-  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
-     <widget class="QSplitter" name="m_pLeftSplitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <widget class="QTreeView" name="m_pAccountsTreeView"/>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="m_pCreatePBtn">
-            <property name="text">
-             <string>Create</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="m_pReadPBtn">
-            <property name="text">
-             <string>Read</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="m_pUpdatePBtn">
-            <property name="text">
-             <string>Update</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="m_pDeletePBtn">
-            <property name="text">
-             <string>Delete</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QTableView" name="m_pTableView">
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="m_pCreatePBtn">
+        <property name="text">
+         <string>Create</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_pReadPBtn">
+        <property name="text">
+         <string>Read</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_pUpdatePBtn">
+        <property name="text">
+         <string>Update</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_pDeletePBtn">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QTableView" name="m_pTableView">
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="m_pMenuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>794</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="m_pMenuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="m_pActionImportCSV"/>
-    <addaction name="m_pActionImportQIF"/>
-    <addaction name="separator"/>
-    <addaction name="m_pActionExit"/>
-   </widget>
-   <widget class="QMenu" name="m_pMenuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="m_pActionAccountList"/>
-   </widget>
-   <addaction name="m_pMenuFile"/>
-   <addaction name="m_pMenuEdit"/>
-  </widget>
-  <widget class="QToolBar" name="m_pMainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="m_pStatusBar"/>
-  <action name="m_pActionImportCSV">
-   <property name="text">
-    <string>Import CSV...</string>
-   </property>
-  </action>
-  <action name="m_pActionExit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-  </action>
-  <action name="m_pActionImportQIF">
-   <property name="text">
-    <string>Import QIF...</string>
-   </property>
-  </action>
-  <action name="m_pActionAccountList">
-   <property name="text">
-    <string>Account List...</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
