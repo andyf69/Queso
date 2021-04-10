@@ -27,9 +27,9 @@ CMainWindow::CMainWindow()
 {
     ui.setupUi(this);
 
+    initAccountList();
     initMenus();
     initStatusBar();
-    initAccountList();
 
     QObject::connect(ui.m_pCreatePBtn, &QPushButton::clicked, this, &CMainWindow::onCreate);
     QObject::connect(ui.m_pReadPBtn, &QPushButton::clicked, this, &CMainWindow::onRead);
@@ -60,15 +60,17 @@ void CMainWindow::initMenus()
     m_pImportCsvAction = new QAction("Import CSV...", this);
     m_pImportQifAction = new QAction("Import QIF...", this);
     m_pExitAction = new QAction("Exit", this);
-    m_pAccountListAction = new QAction("Account List...", this);
+    m_pEditAccountListAction = new QAction("Account List...", this);
 
     m_pMenuBar = new QMenuBar(this);
 
     // Top Level Menus
     m_pFileMenu = new QMenu("&File", m_pMenuBar);
     m_pEditMenu = new QMenu("&Edit", m_pMenuBar);
+    m_pViewMenu = new QMenu("&View", m_pMenuBar);
     m_pMenuBar->addAction(m_pFileMenu->menuAction());
     m_pMenuBar->addAction(m_pEditMenu->menuAction());
+    m_pMenuBar->addAction(m_pViewMenu->menuAction());
 
     // File Menu
     m_pFileMenu->addAction(m_pImportCsvAction);
@@ -77,14 +79,17 @@ void CMainWindow::initMenus()
     m_pFileMenu->addAction(m_pExitAction);
 
     // Edit Menu
-    m_pEditMenu->addAction(m_pAccountListAction);
+    m_pEditMenu->addAction(m_pEditAccountListAction);
+
+    // View Menu
+    m_pViewMenu->addAction(m_pAccountsDockWidget->toggleViewAction());
 
     setMenuBar(m_pMenuBar);
 
     QObject::connect(m_pImportCsvAction, &QAction::triggered, this, &CMainWindow::onImportCSV);
     QObject::connect(m_pImportQifAction, &QAction::triggered, this, &CMainWindow::onImportQIF);
     QObject::connect(m_pExitAction, &QAction::triggered, this, &CMainWindow::onExit);
-    QObject::connect(m_pAccountListAction, &QAction::triggered, this, &CMainWindow::onAccountList);
+    QObject::connect(m_pEditAccountListAction, &QAction::triggered, this, &CMainWindow::onEditAccountList);
 }
 
 void CMainWindow::initStatusBar()
@@ -101,7 +106,6 @@ void CMainWindow::initAccountList()
     addDockWidget(Qt::LeftDockWidgetArea, m_pAccountsDockWidget);
     QTreeView* pTreeView = new QTreeView(m_pAccountsDockWidget);
     m_pAccountsDockWidget->setWidget(pTreeView);
-    //viewMenu->addAction(dock->toggleViewAction());
 
     pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
     pTreeView->setModel(new CAccountListModel(false, pTreeView));
@@ -287,7 +291,7 @@ void CMainWindow::onExit()
     close();
 }
 
-void CMainWindow::onAccountList()
+void CMainWindow::onEditAccountList()
 {
     qDebug() << "onAccountList: TODO";
     CAccountListEditorDlg dlg(this);

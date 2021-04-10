@@ -17,7 +17,7 @@ private:
     void onImportQIF();
     void onExit();
 
-    void onAccountList();
+    void onEditAccountList();
 
     void onCreate();
     void onRead();
@@ -35,9 +35,10 @@ private:
     QAction* m_pImportCsvAction;
     QAction* m_pExitAction;
     QAction* m_pImportQifAction;
-    QAction* m_pAccountListAction;
+    QAction* m_pEditAccountListAction;
     QMenu* m_pFileMenu;
     QMenu* m_pEditMenu;
+    QMenu* m_pViewMenu;
     QMenuBar* m_pMenuBar;
     QStatusBar* m_pStatusBar;
     QDockWidget* m_pAccountsDockWidget;
