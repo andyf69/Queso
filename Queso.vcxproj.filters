@@ -33,9 +33,6 @@
     <QtRcc Include="Queso.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="CMainWindow.ui">
-      <Filter>Resource Files</Filter>
-    </QtUic>
     <ClCompile Include="CMainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -76,6 +73,12 @@
     </ClCompile>
     <ClCompile Include="CCategory.cpp">
       <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CBankingWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrontPageWidget.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +124,12 @@
     <ClInclude Include="CCategory.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="CBankingWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFrontPageWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cheese.ico">
@@ -134,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="CAccountListEditor.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
+    <QtUic Include="CBankingWidget.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
+    <QtUic Include="CFrontPageWidget.ui">
       <Filter>Resource Files</Filter>
     </QtUic>
   </ItemGroup>

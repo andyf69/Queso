@@ -88,16 +88,21 @@
   <ItemGroup>
     <QtRcc Include="Queso.qrc" />
     <QtUic Include="CAccountListEditor.ui" />
-    <QtUic Include="CMainWindow.ui" />
+    <QtUic Include="CBankingWidget.ui" />
+    <QtUic Include="CFrontPageWidget.ui" />
+    <ClInclude Include="CBankingWidget.h" />
     <ClInclude Include="CCategory.h" />
     <ClInclude Include="CFinancialInstitution.h" />
+    <ClInclude Include="CFrontPageWidget.h" />
     <ClInclude Include="CMainWindow.h" />
     <ClCompile Include="CAccount.cpp" />
     <ClCompile Include="CAccountListDelegate.cpp" />
     <ClCompile Include="CAccountListEditorDlg.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
+    <ClCompile Include="CBankingWidget.cpp" />
     <ClCompile Include="CCategory.cpp" />
     <ClCompile Include="CFinancialInstitution.cpp" />
+    <ClCompile Include="CFrontPageWidget.cpp" />
     <ClCompile Include="CImportCSV.cpp" />
     <ClCompile Include="CImportQIF.cpp" />
     <ClCompile Include="CMainWindow.cpp" />

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include "ui_CMainWindow.h"
 
+class QStackedWidget;
 class CMainWindow : public QMainWindow
 {
 public:
@@ -19,11 +19,6 @@ private:
 
     void onEditAccountList();
 
-    void onCreate();
-    void onRead();
-    void onUpdate();
-    void onDelete();
-
     void onAccountActivated(const QModelIndex& index);
 
     virtual void closeEvent(QCloseEvent* pEvent);
@@ -31,7 +26,6 @@ private:
     void saveStateSettings();
     void restoreStateSettings();
 
-    Ui::CMainWindowClass ui;
     QAction* m_pImportCsvAction;
     QAction* m_pExitAction;
     QAction* m_pImportQifAction;
@@ -40,6 +34,7 @@ private:
     QMenu* m_pEditMenu;
     QMenu* m_pViewMenu;
     QMenuBar* m_pMenuBar;
+    QStackedWidget* m_pStackedWidget;
     QStatusBar* m_pStatusBar;
     QDockWidget* m_pAccountsDockWidget;
 };
