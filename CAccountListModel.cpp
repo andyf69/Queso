@@ -1,5 +1,6 @@
 #include "CAccountListModel.h"
 #include "CAccount.h"
+#include "Decimal.h"
 #include <QtSql/QSqlQuery>
 
 namespace
@@ -13,12 +14,9 @@ CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
     clear();
 
     QSqlQuery q;
-    q.prepare("SELECT [Account].[Id]"
-              ", [Account].[AccountTypeId]"
-              ", [Account].[Name]"
-              ", [Account].[Hidden]"
-              "FROM [Account]"
-              "ORDER BY [Account].[AccountTypeId], [Account].[Id]");
+    q.prepare("SELECT [Id], [Hidden]"
+        "FROM [Account]"
+        "ORDER BY [AccountTypeId], [Id]");
     if (q.exec())
     {
         setColumnCount(2);
@@ -30,8 +28,9 @@ CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
             if (bHidden && !bIncludeHidden)
                 continue;
 
-            int iAccountTypeId = q.value("AccountTypeId").toInt();
-            QString oGroup = CAccount::typeToDisplayName(static_cast<CAccount::Type>(iAccountTypeId));
+            CAccount oAccount;
+            oAccount.dbRead(q.value("Id").toInt());
+            QString oGroup = CAccount::typeToDisplayName(oAccount.accountType());
             if (!pGroupItem || oGroup != pGroupItem->text())
             {
                 pGroupItem = new QStandardItem(oGroup);
@@ -50,7 +49,7 @@ CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
                 pRootItem->appendRow(oColumns);
             }
 
-            QStandardItem* pNameItem = new QStandardItem(q.value("Name").toString());
+            QStandardItem* pNameItem = new QStandardItem(oAccount.name());
             pNameItem->setEditable(false);
             if (bIncludeHidden)
             {
@@ -60,7 +59,8 @@ CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
             pNameItem->setForeground(Qt::darkBlue);
             pNameItem->setData(q.value("Id"), static_cast<int>(Role::AccountId));
 
-            QStandardItem* pValueItem = new QStandardItem("$12.34"); // TODO
+            dec::decimal2 bal = oAccount.balance();
+            QStandardItem* pValueItem = new QStandardItem(QString("$%1").arg(QString::fromStdString(bal.asString())));
             pValueItem->setEditable(false);
             pValueItem->setTextAlignment(Qt::AlignRight);
 

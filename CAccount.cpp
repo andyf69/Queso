@@ -45,13 +45,14 @@ QString CAccount::typeToDisplayName(const Type eType)
 bool CAccount::dbCreate()
 {
 	QSqlQuery q;
-	q.prepare("INSERT INTO Account (Name, FIAccountId, AccountTypeId, FinancialInstitutionId, Hidden) "
-		"VALUES(:name, :fiaid, :atid, :fiid, :hidden)");
+	q.prepare("INSERT INTO Account (Name, FIAccountId, AccountTypeId, FinancialInstitutionId, Hidden, Balance) "
+		"VALUES(:name, :fiaid, :atid, :fiid, :hidden, :bal)");
 	q.bindValue(":name", m_oName);
 	q.bindValue(":fiaid", m_iFIAccountId);
-	q.bindValue(":atid", m_iAccountTypeId);
+	q.bindValue(":atid", static_cast<int>(m_eAccountType));
 	q.bindValue(":fiid", m_iFinancialInstitutionId);
 	q.bindValue(":hidden", m_bHidden);
+	q.bindValue(":bal", QString::fromStdString(m_oBalance.asString()));
 	if (q.exec())
 	{
 		m_iId = q.lastInsertId().toInt();
@@ -69,6 +70,7 @@ bool CAccount::dbRead(int id)
 		", [FinancialInstitutionId]"
 		", [Name]"
 		", [Hidden]"
+		", [Balance]"
 		"FROM [Account]"
 		"WHERE [Id]=:id");
 	q.bindValue(":id", id);
@@ -77,11 +79,12 @@ bool CAccount::dbRead(int id)
 		if (q.next())
 		{
 			m_iId = id;
-			m_iAccountTypeId = q.value("AccountTypeId").toInt();
+			m_eAccountType = static_cast<Type>(q.value("AccountTypeId").toInt());
 			m_iFIAccountId = q.value("FIAccountId").toInt();
 			m_iFinancialInstitutionId = q.value("FinancialInstitutionId").toInt();
 			m_oName = q.value("Name").toString();
 			m_bHidden = q.value("Hidden").toBool();
+			m_oBalance = dec::decimal2(q.value("Balance").toString().toStdString());
 			return true;
 		}
 	}
@@ -101,7 +104,7 @@ bool CAccount::dbUpdate()
 	q.bindValue(":id", m_iId);
 	q.bindValue(":name", m_oName);
 	q.bindValue(":fiaid", m_iFIAccountId);
-	q.bindValue(":atid", m_iAccountTypeId);
+	q.bindValue(":atid", static_cast<int>(m_eAccountType));
 	q.bindValue(":fiid", m_iFinancialInstitutionId);
 	q.bindValue(":hidden", m_bHidden);
 	if (q.exec())
