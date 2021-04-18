@@ -9,6 +9,17 @@ public:
     CMainWindow();
 
 private:
+    enum class WidgetType
+    {
+        FrontPage,
+        Banking,
+        Investment,
+        Retirement,
+        Asset,
+        Liability
+    };
+
+private:
     void initMenus();
     void initStatusBar();
     void initAccountList();
@@ -25,6 +36,8 @@ private:
 
     void saveStateSettings();
     void restoreStateSettings();
+
+    QWidget* makeWidget(const WidgetType eWidgetType) const;
 
     QAction* m_pImportCsvAction;
     QAction* m_pExitAction;

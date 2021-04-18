@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{0f242406-08a9-4e40-824e-072d5dbc574e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Banking Register Widget">
+      <UniqueIdentifier>{da8c8dad-0e33-4eaf-b9ff-074944699b7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Queso.qrc">
@@ -74,11 +77,17 @@
     <ClCompile Include="CCategory.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CBankingWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CFrontPageWidget.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBankingRegisterDelegate.cpp">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="CBankingRegisterModel.cpp">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="CBankingWidget.cpp">
+      <Filter>Source Files\Banking Register Widget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,11 +133,17 @@
     <ClInclude Include="CCategory.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="CBankingWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CFrontPageWidget.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBankingRegisterModel.h">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="CBankingWidget.h">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="CBankingRegisterDelegate.h">
+      <Filter>Source Files\Banking Register Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,11 +160,11 @@
     <QtUic Include="CAccountListEditor.ui">
       <Filter>Resource Files</Filter>
     </QtUic>
-    <QtUic Include="CBankingWidget.ui">
-      <Filter>Resource Files</Filter>
-    </QtUic>
     <QtUic Include="CFrontPageWidget.ui">
       <Filter>Resource Files</Filter>
+    </QtUic>
+    <QtUic Include="CBankingWidget.ui">
+      <Filter>Source Files\Banking Register Widget</Filter>
     </QtUic>
   </ItemGroup>
 </Project>

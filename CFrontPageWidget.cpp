@@ -20,11 +20,11 @@ CFrontPageWidget::CFrontPageWidget(QWidget* pParent)
     pModel->setTable("Account");
     pModel->setRelation(4, QSqlRelation("FinancialInstitution", "id", "Name"));
     bool ok = pModel->select();
-    pModel->setHeaderData(0, Qt::Horizontal, tr("Id"));
-    pModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
-    pModel->setHeaderData(2, Qt::Horizontal, tr("FI Acct Id"));
-    pModel->setHeaderData(3, Qt::Horizontal, tr("Acct Type"));
-    pModel->setHeaderData(4, Qt::Horizontal, tr("FI"));
+    pModel->setHeaderData(0, Qt::Horizontal, "Id");
+    pModel->setHeaderData(1, Qt::Horizontal, "Name");
+    pModel->setHeaderData(2, Qt::Horizontal, "FI Acct Id");
+    pModel->setHeaderData(3, Qt::Horizontal, "Acct Type");
+    pModel->setHeaderData(4, Qt::Horizontal, "FI");
     ui.m_pTableView->setModel(pModel);
     ui.m_pTableView->setItemDelegate(new QSqlRelationalDelegate(ui.m_pTableView));
     ui.m_pTableView->setAlternatingRowColors(true);

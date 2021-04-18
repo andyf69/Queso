@@ -7,6 +7,8 @@ class CBankingWidget : public QWidget
 public:
     explicit CBankingWidget(QWidget* pParent);
 
+    void setAccount(const int iAccountId);
+
 private:
     Ui::CBankingWidget ui;
 };

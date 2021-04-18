@@ -36,7 +36,7 @@ CMainWindow::CMainWindow()
     m_pStackedWidget->setObjectName("CStackedWidget");
 
     setCentralWidget(m_pStackedWidget);
-    m_pStackedWidget->addWidget(new CFrontPageWidget(this));
+    m_pStackedWidget->addWidget(makeWidget(WidgetType::FrontPage));
 
     initAccountList();
     initMenus();
@@ -134,15 +134,20 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
     switch (eAccountType)
     {
     case CAccount::Type::Banking:
-        pWidget = new CBankingWidget(this);
+        pWidget = makeWidget(WidgetType::Banking);
+        static_cast<CBankingWidget*>(pWidget)->setAccount(iAccountId);
         break;
     case CAccount::Type::Investment:
+        pWidget = makeWidget(WidgetType::Investment);
         break;
     case CAccount::Type::Retirement:
+        pWidget = makeWidget(WidgetType::Retirement);
         break;
     case CAccount::Type::Asset:
+        pWidget = makeWidget(WidgetType::Asset);
         break;
     case CAccount::Type::Liability:
+        pWidget = makeWidget(WidgetType::Liability);
         break;
     default:
         break;
@@ -153,6 +158,43 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
         m_pStackedWidget->addWidget(pWidget);
         m_pStackedWidget->setCurrentWidget(pWidget);
     }
+}
+
+QWidget* CMainWindow::makeWidget(const WidgetType eWidgetType) const
+{
+    static std::map<WidgetType, QWidget*> soMap;
+
+    QWidget* pWidget = nullptr;
+    auto iter = soMap.find(eWidgetType);
+    if (iter != soMap.end())
+        pWidget = iter->second;
+    else
+    {
+        switch (eWidgetType)
+        {
+        case WidgetType::FrontPage:
+            pWidget = new CFrontPageWidget(m_pStackedWidget);
+            break;
+        case WidgetType::Banking:
+            pWidget = new CBankingWidget(m_pStackedWidget);
+            break;
+        case WidgetType::Investment:
+            break;
+        case WidgetType::Retirement:
+            break;
+        case WidgetType::Asset:
+            break;
+        case WidgetType::Liability:
+            break;
+        default:
+            break;
+        }
+
+        if (pWidget)
+            soMap[eWidgetType] = pWidget;
+    }
+
+    return pWidget;
 }
 
 void CMainWindow::closeEvent(QCloseEvent* pEvent)

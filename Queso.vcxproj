@@ -90,7 +90,9 @@
     <QtUic Include="CAccountListEditor.ui" />
     <QtUic Include="CBankingWidget.ui" />
     <QtUic Include="CFrontPageWidget.ui" />
+    <ClInclude Include="CBankingRegisterModel.h" />
     <ClInclude Include="CBankingWidget.h" />
+    <ClInclude Include="CBankingRegisterDelegate.h" />
     <ClInclude Include="CCategory.h" />
     <ClInclude Include="CFinancialInstitution.h" />
     <ClInclude Include="CFrontPageWidget.h" />
@@ -99,7 +101,9 @@
     <ClCompile Include="CAccountListDelegate.cpp" />
     <ClCompile Include="CAccountListEditorDlg.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
+    <ClCompile Include="CBankingRegisterModel.cpp" />
     <ClCompile Include="CBankingWidget.cpp" />
+    <ClCompile Include="CBankingRegisterDelegate.cpp" />
     <ClCompile Include="CCategory.cpp" />
     <ClCompile Include="CFinancialInstitution.cpp" />
     <ClCompile Include="CFrontPageWidget.cpp" />
