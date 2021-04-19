@@ -111,9 +111,11 @@
     <ClCompile Include="CImportQIF.cpp" />
     <ClCompile Include="CMainWindow.cpp" />
     <ClCompile Include="CPayee.cpp" />
+    <ClCompile Include="CPayeeListDlg.cpp" />
     <ClCompile Include="CSettings.cpp" />
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="CPayeeListDlg.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAccount.h" />
@@ -124,6 +126,7 @@
     <ClInclude Include="CImportCSV.h" />
     <ClInclude Include="CImportQIF.h" />
     <ClInclude Include="CPayee.h" />
+    <ClInclude Include="CPayeeListDlg.h" />
     <ClInclude Include="CSettings.h" />
     <ClInclude Include="Decimal.h" />
     <ClInclude Include="resource.h" />

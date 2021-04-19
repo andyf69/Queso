@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Banking Register Widget">
       <UniqueIdentifier>{da8c8dad-0e33-4eaf-b9ff-074944699b7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Payee List">
+      <UniqueIdentifier>{cee527ae-d304-4d93-a09b-fa64e6d82570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Queso.qrc">
@@ -89,6 +92,9 @@
     <ClCompile Include="CBankingWidget.cpp">
       <Filter>Source Files\Banking Register Widget</Filter>
     </ClCompile>
+    <ClCompile Include="CPayeeListDlg.cpp">
+      <Filter>Source Files\Payee List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImportCSV.h">
@@ -145,6 +151,9 @@
     <ClInclude Include="CBankingRegisterDelegate.h">
       <Filter>Source Files\Banking Register Widget</Filter>
     </ClInclude>
+    <ClInclude Include="CPayeeListDlg.h">
+      <Filter>Source Files\Payee List</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cheese.ico">
@@ -165,6 +174,9 @@
     </QtUic>
     <QtUic Include="CBankingWidget.ui">
       <Filter>Source Files\Banking Register Widget</Filter>
+    </QtUic>
+    <QtUic Include="CPayeeListDlg.ui">
+      <Filter>Source Files\Payee List</Filter>
     </QtUic>
   </ItemGroup>
 </Project>

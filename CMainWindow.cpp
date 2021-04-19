@@ -8,6 +8,7 @@
 #include "CFrontPageWidget.h"
 #include "CImportCSV.h"
 #include "CImportQIF.h"
+#include "CPayeeListDlg.h"
 #include "CSettings.h"
 
 #include <QtCore/QDebug>
@@ -51,6 +52,7 @@ void CMainWindow::initMenus()
     m_pImportQifAction = new QAction("Import QIF...", this);
     m_pExitAction = new QAction("Exit", this);
     m_pEditAccountListAction = new QAction("Account List...", this);
+    m_pEditPayeeListAction = new QAction("Payee List...", this);
 
     m_pMenuBar = new QMenuBar(this);
 
@@ -70,6 +72,7 @@ void CMainWindow::initMenus()
 
     // Edit Menu
     m_pEditMenu->addAction(m_pEditAccountListAction);
+    m_pEditMenu->addAction(m_pEditPayeeListAction);
 
     // View Menu
     m_pViewMenu->addAction(m_pAccountsDockWidget->toggleViewAction());
@@ -80,6 +83,7 @@ void CMainWindow::initMenus()
     QObject::connect(m_pImportQifAction, &QAction::triggered, this, &CMainWindow::onImportQIF);
     QObject::connect(m_pExitAction, &QAction::triggered, this, &CMainWindow::onExit);
     QObject::connect(m_pEditAccountListAction, &QAction::triggered, this, &CMainWindow::onEditAccountList);
+    QObject::connect(m_pEditPayeeListAction, &QAction::triggered, this, &CMainWindow::onEditPayeeList);
 }
 
 void CMainWindow::initStatusBar()
@@ -266,7 +270,12 @@ void CMainWindow::onExit()
 
 void CMainWindow::onEditAccountList()
 {
-    qDebug() << "onAccountList: TODO";
     CAccountListEditorDlg dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::onEditPayeeList()
+{
+    CPayeeListDlg dlg(this);
     dlg.exec();
 }

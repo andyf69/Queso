@@ -29,6 +29,7 @@ private:
     void onExit();
 
     void onEditAccountList();
+    void onEditPayeeList();
 
     void onAccountActivated(const QModelIndex& index);
 
@@ -43,6 +44,7 @@ private:
     QAction* m_pExitAction;
     QAction* m_pImportQifAction;
     QAction* m_pEditAccountListAction;
+    QAction* m_pEditPayeeListAction;
     QMenu* m_pFileMenu;
     QMenu* m_pEditMenu;
     QMenu* m_pViewMenu;
