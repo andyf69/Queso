@@ -1,5 +1,7 @@
 #include "CPayeeListDlg.h"
+#include <QtSql/QSqlRecord>
 #include <QtSql/QSqlTableModel>
+#include <QtWidgets/QInputDialog>
 
 CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
     : QDialog(pParent)
@@ -7,6 +9,7 @@ CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
     ui.setupUi(this);
 
     QObject::connect(ui.m_pAddButton, &QPushButton::clicked, this, &CPayeeListDlg::onAdd);
+    QObject::connect(ui.m_pEditButton, &QPushButton::clicked, this, &CPayeeListDlg::onEdit);
     QObject::connect(ui.m_pCloseButton, &QPushButton::clicked, this, &CPayeeListDlg::onClose);
 
     initPayeeList(ui.m_pListView);
@@ -14,41 +17,60 @@ CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
 
 void CPayeeListDlg::initPayeeList(QListView* pListView)
 {
-    QSqlTableModel* pModel = new QSqlTableModel(this);
-    pModel->setTable("Payee");
-    pModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    pModel->setSort(1, Qt::AscendingOrder);
-    pModel->select();
+    m_pModel = new QSqlTableModel(this);
+    m_pModel->setTable("Payee");
+    m_pModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    m_pModel->setSort(1, Qt::AscendingOrder);
+    m_pModel->select();
 
-    pListView->setModel(pModel);
+    pListView->setModel(m_pModel);
     pListView->setModelColumn(1);
-
-    //pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
-    //pTreeView->setModel(new CAccountListModel(true, pTreeView));
-    //pTreeView->setHeaderHidden(true);
-    //pTreeView->setRootIsDecorated(false);
-    //pTreeView->setItemsExpandable(false); // stop the user from expanding/collapsing the tree nodes
-    //pTreeView->setAlternatingRowColors(true);
-    //pTreeView->setIndentation(0);
-    //pTreeView->resizeColumnToContents(0);
-    //pTreeView->resizeColumnToContents(1);
-    //pTreeView->expandAll();
+    pListView->setAlternatingRowColors(true);
+    pListView->setEditTriggers(QListView::NoEditTriggers);
     QObject::connect(pListView, &QListView::activated, this, &CPayeeListDlg::onPayeeActivated);
 }
 
-void CPayeeListDlg::onPayeeActivated(const QModelIndex& index)
+void CPayeeListDlg::onPayeeActivated(const QModelIndex& oIndex)
 {
-    //const CAccountListModel* pModel = static_cast<const CAccountListModel*>(index.model());
-    //int iAccountId = pModel->accountId(index);
-    //if (iAccountId == 0)
-    //    return;
+    QString oPayeeName = m_pModel->data(oIndex).toString();
+    int iPayeeId = m_pModel->data(oIndex.siblingAtColumn(0)).toInt();
+    QString oNewPayee = QInputDialog::getText(this, "Edit Payee", "Payee Name", QLineEdit::Normal, oPayeeName).trimmed();
+    if (!oNewPayee.isEmpty() && oNewPayee != oPayeeName)
+    {
+        m_pModel->setData(oIndex, oNewPayee, Qt::EditRole);
+        m_pModel->submitAll();
+    }
+}
 
-    // TODO: Edit the selected payee
+void CPayeeListDlg::onEdit()
+{
+    QItemSelectionModel* pSelectionModel = ui.m_pListView->selectionModel();
+    if (pSelectionModel->hasSelection())
+    {
+        QModelIndexList oIndexList = pSelectionModel->selectedIndexes();
+        const QModelIndex& oIndex = oIndexList.front();
+        QString oPayeeName = m_pModel->data(oIndex).toString();
+        int iPayeeId = m_pModel->data(oIndex.siblingAtColumn(0)).toInt();
+        QString oNewPayee = QInputDialog::getText(this, "Edit Payee", "Payee Name", QLineEdit::Normal, oPayeeName).trimmed();
+        if (!oNewPayee.isEmpty() && oNewPayee != oPayeeName)
+        {
+            m_pModel->setData(oIndex, oNewPayee, Qt::EditRole);
+            m_pModel->submitAll();
+        }
+    }
 }
 
 void CPayeeListDlg::onAdd()
 {
-    // TODO: Add a new payee item
+    QString oNewPayee = QInputDialog::getText(this, "Add Payee", "Payee Name", QLineEdit::Normal).trimmed();
+    if (!oNewPayee.isEmpty())
+    {
+        QSqlRecord oRecord = m_pModel->record();
+        oRecord.remove(oRecord.indexOf("Id"));
+        oRecord.setValue("Name", oNewPayee);
+        m_pModel->insertRecord(-1, oRecord);
+        m_pModel->submitAll();
+    }
 }
 
 void CPayeeListDlg::onClose()

@@ -37,7 +37,7 @@ bool CPayee::dbRead(int id)
 bool CPayee::dbUpdate()
 {
 	QSqlQuery q;
-	q.prepare("UPDATE Payee SET Name=':name' WHERE Id=:id");
+	q.prepare("UPDATE Payee SET Name=:name WHERE [Id]=:id");
 	q.bindValue(":id", m_iId);
 	q.bindValue(":name", m_oName);
 	if (q.exec())
@@ -48,7 +48,7 @@ bool CPayee::dbUpdate()
 bool CPayee::dbDelete()
 {
 	QSqlQuery q;
-	q.prepare("DELETE FROM Payee WHERE Id=:id");
+	q.prepare("DELETE FROM Payee WHERE [Id]=:id");
 	q.bindValue(":id", m_iId);
 	if (q.exec())
 		return true;

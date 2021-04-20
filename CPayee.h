@@ -15,6 +15,7 @@ public:
 
 	int id() const { return m_iId; }
 	const QString& name() const { return m_oName; }
+	void setName(const QString& oName) { m_oName = oName; }
 
 private:
 	CPayee(const CPayee&) = delete;
