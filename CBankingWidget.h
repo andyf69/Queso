@@ -1,15 +1,21 @@
 #pragma once
-#include <QtWidgets/QWidget>
+#include "CMainWidget.h"
 #include "ui_CBankingWidget.h"
 
-class CBankingWidget : public QWidget
+namespace Queso
 {
-public:
-    explicit CBankingWidget(QWidget* pParent);
+    class CBankingWidget : public CMainWidget
+    {
+    public:
+        explicit CBankingWidget(QWidget* pParent);
 
-    void setAccount(const int iAccountId);
+        virtual MainWidget::Type witdgetType() const { return MainWidget::Type::Banking; }
 
-private:
-    Ui::CBankingWidget ui;
-};
+        void setAccount(const int iAccountId);
 
+    private:
+        Ui::CBankingWidget ui;
+
+        void onEdit(const QModelIndex& oIndex);
+    };
+}

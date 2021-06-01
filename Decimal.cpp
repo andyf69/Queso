@@ -2,45 +2,48 @@
 
 using namespace dec;
 
-static bool isMultOverflow(const int64_t value1, const int64_t value2)
+namespace
 {
-	if (value1 == 0 || value2 == 0)
-		return false;
-
-	if ((value1 < 0) != (value2 < 0))
-	{ // different sign
-		if (value1 == std::numeric_limits<int64_t>::min())
-			return value2 > 1;
-		if (value2 == std::numeric_limits<int64_t>::min())
-			return value1 > 1;
-		if (value1 < 0)
-			return isMultOverflow(-value1, value2);
-		if (value2 < 0)
-			return isMultOverflow(value1, -value2);
-	}
-	else if (value1 < 0 && value2 < 0)
+	static bool isMultOverflow(const int64_t value1, const int64_t value2)
 	{
-		if (value1 == std::numeric_limits<int64_t>::min())
-			return value2 < -1;
-		if (value2 == std::numeric_limits<int64_t>::min())
-			return value1 < -1;
-		return isMultOverflow(-value1, -value2);
+		if (value1 == 0 || value2 == 0)
+			return false;
+
+		if ((value1 < 0) != (value2 < 0))
+		{ // different sign
+			if (value1 == std::numeric_limits<int64_t>::min())
+				return value2 > 1;
+			if (value2 == std::numeric_limits<int64_t>::min())
+				return value1 > 1;
+			if (value1 < 0)
+				return isMultOverflow(-value1, value2);
+			if (value2 < 0)
+				return isMultOverflow(value1, -value2);
+		}
+		else if (value1 < 0 && value2 < 0)
+		{
+			if (value1 == std::numeric_limits<int64_t>::min())
+				return value2 < -1;
+			if (value2 == std::numeric_limits<int64_t>::min())
+				return value1 < -1;
+			return isMultOverflow(-value1, -value2);
+		}
+
+		return (value1 > std::numeric_limits<int64_t>::max() / value2);
 	}
 
-	return (value1 > std::numeric_limits<int64_t>::max() / value2);
-}
-
-// calculate greatest common divisor
-static int64_t gcd(int64_t a, int64_t b)
-{
-	int64_t c;
-	while (a != 0)
+	// calculate greatest common divisor
+	static int64_t gcd(int64_t a, int64_t b)
 	{
-		c = a;
-		a = b % a;
-		b = c;
+		int64_t c;
+		while (a != 0)
+		{
+			c = a;
+			a = b % a;
+			b = c;
+		}
+		return b;
 	}
-	return b;
 }
 
 // calculate output = round(a / b), where output, a, b are int64_t

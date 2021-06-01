@@ -95,6 +95,12 @@
     <ClCompile Include="CPayeeListDlg.cpp">
       <Filter>Source Files\Payee List</Filter>
     </ClCompile>
+    <ClCompile Include="CBankingTransactionEditorDlg.cpp">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="CBankingTransaction.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImportCSV.h">
@@ -154,6 +160,15 @@
     <ClInclude Include="CPayeeListDlg.h">
       <Filter>Source Files\Payee List</Filter>
     </ClInclude>
+    <ClInclude Include="CMainWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBankingTransactionEditorDlg.h">
+      <Filter>Source Files\Banking Register Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="CBankingTransaction.h">
+      <Filter>Source Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cheese.ico">
@@ -177,6 +192,9 @@
     </QtUic>
     <QtUic Include="CPayeeListDlg.ui">
       <Filter>Source Files\Payee List</Filter>
+    </QtUic>
+    <QtUic Include="CBankingTransactionEditor.ui">
+      <Filter>Source Files\Banking Register Widget</Filter>
     </QtUic>
   </ItemGroup>
 </Project>

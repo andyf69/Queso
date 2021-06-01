@@ -4,8 +4,8 @@
 #include <QtSql/QSqlRelationalDelegate>
 #include <QtSql/QSqlRelationalTableModel>
 
-CFrontPageWidget::CFrontPageWidget(QWidget* pParent)
-    :QWidget(pParent)
+Queso::CFrontPageWidget::CFrontPageWidget(QWidget* pParent)
+    :CMainWidget(pParent)
 {
     ui.setupUi(this);
 
@@ -30,7 +30,7 @@ CFrontPageWidget::CFrontPageWidget(QWidget* pParent)
     ui.m_pTableView->setAlternatingRowColors(true);
 }
 
-void CFrontPageWidget::onCreate()
+void Queso::CFrontPageWidget::onCreate()
 {
     qDebug() << "onCreate";
     QSqlQuery q;
@@ -46,7 +46,7 @@ void CFrontPageWidget::onCreate()
         qDebug() << "Error";
 }
 
-void CFrontPageWidget::onRead()
+void Queso::CFrontPageWidget::onRead()
 {
     qDebug() << "onRead";
     QSqlQuery q;
@@ -69,7 +69,7 @@ void CFrontPageWidget::onRead()
     }
 }
 
-void CFrontPageWidget::onUpdate()
+void Queso::CFrontPageWidget::onUpdate()
 {
     qDebug() << "onUpdate";
     QSqlQuery q;
@@ -85,7 +85,7 @@ void CFrontPageWidget::onUpdate()
         qDebug() << "Error";
 }
 
-void CFrontPageWidget::onDelete()
+void Queso::CFrontPageWidget::onDelete()
 {
     qDebug() << "onDelete";
     QSqlQuery q;

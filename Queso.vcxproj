@@ -88,20 +88,26 @@
   <ItemGroup>
     <QtRcc Include="Queso.qrc" />
     <QtUic Include="CAccountListEditor.ui" />
+    <QtUic Include="CBankingTransactionEditor.ui" />
     <QtUic Include="CBankingWidget.ui" />
     <QtUic Include="CFrontPageWidget.ui" />
     <ClInclude Include="CBankingRegisterModel.h" />
+    <ClInclude Include="CBankingTransaction.h" />
+    <ClInclude Include="CBankingTransactionEditorDlg.h" />
     <ClInclude Include="CBankingWidget.h" />
     <ClInclude Include="CBankingRegisterDelegate.h" />
     <ClInclude Include="CCategory.h" />
     <ClInclude Include="CFinancialInstitution.h" />
     <ClInclude Include="CFrontPageWidget.h" />
+    <ClInclude Include="CMainWidget.h" />
     <ClInclude Include="CMainWindow.h" />
     <ClCompile Include="CAccount.cpp" />
     <ClCompile Include="CAccountListDelegate.cpp" />
     <ClCompile Include="CAccountListEditorDlg.cpp" />
     <ClCompile Include="CAccountListModel.cpp" />
     <ClCompile Include="CBankingRegisterModel.cpp" />
+    <ClCompile Include="CBankingTransaction.cpp" />
+    <ClCompile Include="CBankingTransactionEditorDlg.cpp" />
     <ClCompile Include="CBankingWidget.cpp" />
     <ClCompile Include="CBankingRegisterDelegate.cpp" />
     <ClCompile Include="CCategory.cpp" />

@@ -26,7 +26,7 @@
 #include <QtWidgets/QTableView>
 
 
-CMainWindow::CMainWindow()
+Queso::CMainWindow::CMainWindow()
     : QMainWindow()
 {
     setObjectName("CMainWindow");
@@ -37,7 +37,7 @@ CMainWindow::CMainWindow()
     m_pStackedWidget->setObjectName("CStackedWidget");
 
     setCentralWidget(m_pStackedWidget);
-    m_pStackedWidget->addWidget(makeWidget(WidgetType::FrontPage));
+    m_pStackedWidget->addWidget(makeWidget(MainWidget::Type::FrontPage));
 
     initAccountList();
     initMenus();
@@ -46,7 +46,7 @@ CMainWindow::CMainWindow()
     restoreStateSettings();
 }
 
-void CMainWindow::initMenus()
+void Queso::CMainWindow::initMenus()
 {
     m_pImportCsvAction = new QAction("Import CSV...", this);
     m_pImportQifAction = new QAction("Import QIF...", this);
@@ -86,13 +86,13 @@ void CMainWindow::initMenus()
     QObject::connect(m_pEditPayeeListAction, &QAction::triggered, this, &CMainWindow::onEditPayeeList);
 }
 
-void CMainWindow::initStatusBar()
+void Queso::CMainWindow::initStatusBar()
 {
     m_pStatusBar = new QStatusBar(this);
     setStatusBar(m_pStatusBar);
 }
 
-void CMainWindow::initAccountList()
+void Queso::CMainWindow::initAccountList()
 {
     m_pAccountsDockWidget = new QDockWidget("Accounts", this);
     m_pAccountsDockWidget->setObjectName("AccountsDockWidget");
@@ -114,7 +114,7 @@ void CMainWindow::initAccountList()
     QObject::connect(pTreeView, &QTreeView::activated, this, &CMainWindow::onAccountActivated);
 }
 
-void CMainWindow::onAccountActivated(const QModelIndex& index)
+void Queso::CMainWindow::onAccountActivated(const QModelIndex& index)
 {
     const CAccountListModel* pModel = static_cast<const CAccountListModel*>(index.model());
     int iAccountId = pModel->accountId(index);
@@ -134,24 +134,24 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
     QString oInstitution = oFI.name();
 
     qDebug() << iAccountId << oName << oInstitution;
-    QWidget* pWidget = nullptr;
+    CMainWidget* pWidget = nullptr;
     switch (eAccountType)
     {
     case CAccount::Type::Banking:
-        pWidget = makeWidget(WidgetType::Banking);
+        pWidget = makeWidget(MainWidget::Type::Banking);
         static_cast<CBankingWidget*>(pWidget)->setAccount(iAccountId);
         break;
     case CAccount::Type::Investment:
-        pWidget = makeWidget(WidgetType::Investment);
+        pWidget = makeWidget(MainWidget::Type::Investment);
         break;
     case CAccount::Type::Retirement:
-        pWidget = makeWidget(WidgetType::Retirement);
+        pWidget = makeWidget(MainWidget::Type::Retirement);
         break;
     case CAccount::Type::Asset:
-        pWidget = makeWidget(WidgetType::Asset);
+        pWidget = makeWidget(MainWidget::Type::Asset);
         break;
     case CAccount::Type::Liability:
-        pWidget = makeWidget(WidgetType::Liability);
+        pWidget = makeWidget(MainWidget::Type::Liability);
         break;
     default:
         break;
@@ -164,11 +164,11 @@ void CMainWindow::onAccountActivated(const QModelIndex& index)
     }
 }
 
-QWidget* CMainWindow::makeWidget(const WidgetType eWidgetType) const
+Queso::CMainWidget* Queso::CMainWindow::makeWidget(const MainWidget::Type eWidgetType) const
 {
-    static std::map<WidgetType, QWidget*> soMap;
+    static std::map<MainWidget::Type, CMainWidget*> soMap;
 
-    QWidget* pWidget = nullptr;
+    CMainWidget* pWidget = nullptr;
     auto iter = soMap.find(eWidgetType);
     if (iter != soMap.end())
         pWidget = iter->second;
@@ -176,19 +176,19 @@ QWidget* CMainWindow::makeWidget(const WidgetType eWidgetType) const
     {
         switch (eWidgetType)
         {
-        case WidgetType::FrontPage:
+        case MainWidget::Type::FrontPage:
             pWidget = new CFrontPageWidget(m_pStackedWidget);
             break;
-        case WidgetType::Banking:
+        case MainWidget::Type::Banking:
             pWidget = new CBankingWidget(m_pStackedWidget);
             break;
-        case WidgetType::Investment:
+        case MainWidget::Type::Investment:
             break;
-        case WidgetType::Retirement:
+        case MainWidget::Type::Retirement:
             break;
-        case WidgetType::Asset:
+        case MainWidget::Type::Asset:
             break;
-        case WidgetType::Liability:
+        case MainWidget::Type::Liability:
             break;
         default:
             break;
@@ -201,27 +201,27 @@ QWidget* CMainWindow::makeWidget(const WidgetType eWidgetType) const
     return pWidget;
 }
 
-void CMainWindow::closeEvent(QCloseEvent* pEvent)
+void Queso::CMainWindow::closeEvent(QCloseEvent* pEvent)
 {
     saveStateSettings();
     QMainWindow::closeEvent(pEvent);
 }
 
-void CMainWindow::saveStateSettings()
+void Queso::CMainWindow::saveStateSettings()
 {
     CSettings oSettings;
     oSettings.setMainWindowGeometry(saveGeometry());
     oSettings.setMainWindowState(saveState());
 }
 
-void CMainWindow::restoreStateSettings()
+void Queso::CMainWindow::restoreStateSettings()
 {
     CSettings oSettings;
     restoreGeometry(oSettings.mainWindowGeometry());
     restoreState(oSettings.mainWindowState());
 }
 
-void CMainWindow::onImportCSV()
+void Queso::CMainWindow::onImportCSV()
 {
     qDebug() << "onImportCSV";
 
@@ -235,7 +235,7 @@ void CMainWindow::onImportCSV()
     }
 }
 
-void CMainWindow::onImportQIF()
+void Queso::CMainWindow::onImportQIF()
 {
     qDebug() << "onImportQIF";
 
@@ -262,19 +262,19 @@ void CMainWindow::onImportQIF()
     }
 }
 
-void CMainWindow::onExit()
+void Queso::CMainWindow::onExit()
 {
     qDebug() << "onExit";
     close();
 }
 
-void CMainWindow::onEditAccountList()
+void Queso::CMainWindow::onEditAccountList()
 {
     CAccountListEditorDlg dlg(this);
     dlg.exec();
 }
 
-void CMainWindow::onEditPayeeList()
+void Queso::CMainWindow::onEditPayeeList()
 {
     CPayeeListDlg dlg(this);
     dlg.exec();

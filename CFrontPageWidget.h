@@ -1,17 +1,22 @@
 #pragma once
-#include <QtWidgets/QWidget>
+#include "CMainWidget.h"
 #include "ui_CFrontPageWidget.h"
 
-class CFrontPageWidget : public QWidget
+namespace Queso
 {
-public:
-    explicit CFrontPageWidget(QWidget* pParent);
+    class CFrontPageWidget : public CMainWidget
+    {
+    public:
+        explicit CFrontPageWidget(QWidget* pParent);
 
-private:
-    Ui::CFrontPageWidget ui;
+        virtual MainWidget::Type witdgetType() const { return MainWidget::Type::FrontPage; }
 
-    void onCreate();
-    void onRead();
-    void onUpdate();
-    void onDelete();
-};
+    private:
+        Ui::CFrontPageWidget ui;
+
+        void onCreate();
+        void onRead();
+        void onUpdate();
+        void onDelete();
+    };
+}
