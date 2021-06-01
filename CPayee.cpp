@@ -3,7 +3,7 @@
 #include <QtSql/QSqlQuery>
 
 
-bool CPayee::dbCreate()
+bool Queso::CPayee::dbCreate()
 {
 	QSqlQuery q;
 	q.prepare("INSERT INTO Payee (Name) VALUES(:name)");
@@ -16,7 +16,7 @@ bool CPayee::dbCreate()
 	return false;
 }
 
-bool CPayee::dbRead(int id)
+bool Queso::CPayee::dbRead(int id)
 {
 	QSqlQuery q;
 	q.prepare("SELECT [Id], [Name] FROM [Payee] WHERE [Id]=:id");
@@ -34,7 +34,7 @@ bool CPayee::dbRead(int id)
 	return false;
 }
 
-bool CPayee::dbUpdate()
+bool Queso::CPayee::dbUpdate()
 {
 	QSqlQuery q;
 	q.prepare("UPDATE Payee SET Name=:name WHERE [Id]=:id");
@@ -45,7 +45,7 @@ bool CPayee::dbUpdate()
 	return false;
 }
 
-bool CPayee::dbDelete()
+bool Queso::CPayee::dbDelete()
 {
 	QSqlQuery q;
 	q.prepare("DELETE FROM Payee WHERE [Id]=:id");

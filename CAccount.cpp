@@ -2,7 +2,7 @@
 #include <QtCore/QVariant>
 #include <QtSql/QSqlQuery>
 
-QString CAccount::typeToTypeName(const Type eType)
+QString Queso::CAccount::typeToTypeName(const Type eType)
 {
 	switch (eType)
 	{
@@ -22,7 +22,7 @@ QString CAccount::typeToTypeName(const Type eType)
 	return QString();
 }
 
-QString CAccount::typeToDisplayName(const Type eType)
+QString Queso::CAccount::typeToDisplayName(const Type eType)
 {
 	switch (eType)
 	{
@@ -42,7 +42,7 @@ QString CAccount::typeToDisplayName(const Type eType)
 	return QString();
 }
 
-bool CAccount::dbCreate()
+bool Queso::CAccount::dbCreate()
 {
 	QSqlQuery q;
 	q.prepare("INSERT INTO Account (Name, FIAccountId, AccountTypeId, FinancialInstitutionId, Hidden, Balance) "
@@ -61,7 +61,7 @@ bool CAccount::dbCreate()
 	return false;
 }
 
-bool CAccount::dbRead(int id)
+bool Queso::CAccount::dbRead(int id)
 {
 	QSqlQuery q;
 	q.prepare("SELECT [Id]"
@@ -92,7 +92,7 @@ bool CAccount::dbRead(int id)
 	return false;
 }
 
-bool CAccount::dbUpdate()
+bool Queso::CAccount::dbUpdate()
 {
 	QSqlQuery q;
 	q.prepare("UPDATE Account SET Name=':name'"
@@ -112,7 +112,7 @@ bool CAccount::dbUpdate()
 	return false;
 }
 
-bool CAccount::dbDelete()
+bool Queso::CAccount::dbDelete()
 {
 	QSqlQuery q;
 	q.prepare("DELETE FROM Account WHERE Id=:id");

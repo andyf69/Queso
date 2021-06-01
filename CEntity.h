@@ -1,12 +1,15 @@
 #pragma once
-class CEntity
+
+namespace Queso
 {
-public:
-	virtual ~CEntity() = default;
+	class CEntity
+	{
+	public:
+		virtual ~CEntity() = default;
 
-	virtual bool dbCreate() = 0;
-	virtual bool dbRead(int id) = 0;
-	virtual bool dbUpdate() = 0;
-	virtual bool dbDelete() = 0;
-};
-
+		virtual bool dbCreate() = 0;
+		virtual bool dbRead(int id) = 0;
+		virtual bool dbUpdate() = 0;
+		virtual bool dbDelete() = 0;
+	};
+}

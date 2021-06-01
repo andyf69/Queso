@@ -3,7 +3,7 @@
 #include <QtSql/QSqlQuery>
 
 
-bool CCategory::dbCreate()
+bool Queso::CCategory::dbCreate()
 {
 	QSqlQuery q;
 	q.prepare("INSERT INTO Category (Name) VALUES(:name, :desc, :income)");
@@ -18,7 +18,7 @@ bool CCategory::dbCreate()
 	return false;
 }
 
-bool CCategory::dbRead(int id)
+bool Queso::CCategory::dbRead(int id)
 {
 	QSqlQuery q;
 	q.prepare("SELECT [Id], [Name], [Description], [Income] FROM [Category] WHERE [Id]=:id");
@@ -38,7 +38,7 @@ bool CCategory::dbRead(int id)
 	return false;
 }
 
-bool CCategory::dbUpdate()
+bool Queso::CCategory::dbUpdate()
 {
 	QSqlQuery q;
 	q.prepare("UPDATE Category SET Name=':name' Description=':desc' Income=':income' WHERE Id=:id");
@@ -51,7 +51,7 @@ bool CCategory::dbUpdate()
 	return false;
 }
 
-bool CCategory::dbDelete()
+bool Queso::CCategory::dbDelete()
 {
 	QSqlQuery q;
 	q.prepare("DELETE FROM Category WHERE Id=:id");
