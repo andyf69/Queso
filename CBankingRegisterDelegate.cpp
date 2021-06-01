@@ -3,7 +3,7 @@
 #include <QtGui/QPainter>
 #include <QtWidgets/QApplication>
 
-void CBankingRegisterDelegate::paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+void Queso::CBankingRegisterDelegate::paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     QStyleOptionViewItem opt(option);
     QStyledItemDelegate::initStyleOption(&opt, index);

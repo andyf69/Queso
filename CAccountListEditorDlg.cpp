@@ -3,7 +3,7 @@
 #include "CAccountListModel.h"
 #include <QtCore/QDebug>
 
-CAccountListEditorDlg::CAccountListEditorDlg(QWidget* pParent)
+Queso::CAccountListEditorDlg::CAccountListEditorDlg(QWidget* pParent)
     : QDialog(pParent)
 {
     ui.setupUi(this);
@@ -15,7 +15,7 @@ CAccountListEditorDlg::CAccountListEditorDlg(QWidget* pParent)
     initAccountList(ui.m_pAccountsTreeView);
 }
 
-void CAccountListEditorDlg::initAccountList(QTreeView* pTreeView)
+void Queso::CAccountListEditorDlg::initAccountList(QTreeView* pTreeView)
 {
     pTreeView->setItemDelegate(new CAccountListDelegate(pTreeView));
     pTreeView->setModel(new CAccountListModel(true, pTreeView));
@@ -30,7 +30,7 @@ void CAccountListEditorDlg::initAccountList(QTreeView* pTreeView)
     QObject::connect(pTreeView, &QTreeView::activated, this, &CAccountListEditorDlg::onAccountActivated);
 }
 
-void CAccountListEditorDlg::onAccountActivated(const QModelIndex& index)
+void Queso::CAccountListEditorDlg::onAccountActivated(const QModelIndex& index)
 {
     const CAccountListModel* pModel = static_cast<const CAccountListModel*>(index.model());
     int iAccountId = pModel->accountId(index);
@@ -40,12 +40,12 @@ void CAccountListEditorDlg::onAccountActivated(const QModelIndex& index)
     // TODO: Edit the selected account
 }
 
-void CAccountListEditorDlg::onAdd()
+void Queso::CAccountListEditorDlg::onAdd()
 {
     // TODO: Add a new account item
 }
 
-void CAccountListEditorDlg::onDelete()
+void Queso::CAccountListEditorDlg::onDelete()
 {
     for (const auto index : ui.m_pAccountsTreeView->selectionModel()->selectedIndexes())
     {
@@ -62,7 +62,7 @@ void CAccountListEditorDlg::onDelete()
     }
 }
 
-void CAccountListEditorDlg::onClose()
+void Queso::CAccountListEditorDlg::onClose()
 {
     close();
 }

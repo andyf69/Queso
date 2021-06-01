@@ -3,7 +3,7 @@
 #include <QtGui/QPainter>
 #include <QtWidgets/QApplication>
 
-void CAccountListDelegate::paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+void Queso::CAccountListDelegate::paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     QStyledItemDelegate::paint(pPainter, option, index);
 

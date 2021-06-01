@@ -8,7 +8,7 @@ namespace
     enum class Role { AccountId = Qt::UserRole + 1 };
 }
 
-CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
+Queso::CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
     :QStandardItemModel(pParent)
 {
     clear();
@@ -73,7 +73,7 @@ CAccountListModel::CAccountListModel(bool bIncludeHidden, QObject* pParent)
     }
 }
 
-int CAccountListModel::accountId(const QModelIndex& oIndex) const
+int Queso::CAccountListModel::accountId(const QModelIndex& oIndex) const
 {
     return oIndex.siblingAtColumn(0).data(static_cast<int>(Role::AccountId)).toInt();
 }

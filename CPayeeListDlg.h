@@ -4,21 +4,23 @@
 
 class QSqlTableModel;
 
-class CPayeeListDlg : public QDialog
+namespace Queso
 {
-public:
-	explicit CPayeeListDlg(QWidget* pParent = nullptr);
+    class CPayeeListDlg : public QDialog
+    {
+    public:
+        explicit CPayeeListDlg(QWidget* pParent = nullptr);
 
-private:
-    void initPayeeList(QListView* pListView);
+    private:
+        void initPayeeList(QListView* pListView);
 
-    void onPayeeActivated(const QModelIndex& oIndex);
+        void onPayeeActivated(const QModelIndex& oIndex);
 
-    void onAdd();
-    void onEdit();
-    void onClose();
-    
-    Ui::CPayeeListDlg ui;
-    QSqlTableModel* m_pModel;
-};
+        void onAdd();
+        void onEdit();
+        void onClose();
 
+        Ui::CPayeeListDlg ui;
+        QSqlTableModel* m_pModel;
+    };
+}

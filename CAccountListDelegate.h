@@ -1,13 +1,15 @@
 #pragma once
 #include <QtWidgets/QStyledItemDelegate>
 
-class CAccountListDelegate : public QStyledItemDelegate
+namespace Queso
 {
-public:
-    explicit CAccountListDelegate(QObject* pParent = nullptr) : QStyledItemDelegate(pParent) {}
-    ~CAccountListDelegate() = default;
+    class CAccountListDelegate : public QStyledItemDelegate
+    {
+    public:
+        explicit CAccountListDelegate(QObject* pParent = nullptr) : QStyledItemDelegate(pParent) {}
+        ~CAccountListDelegate() = default;
 
-protected:
-    virtual void paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-};
-
+    protected:
+        virtual void paint(QPainter* pPainter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    };
+}

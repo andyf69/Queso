@@ -1,12 +1,12 @@
 #include "CBankingRegisterModel.h"
 #include <QtSql/QSqlQuery>
 
-CBankingRegisterModel::CBankingRegisterModel(QObject* pParent)
+Queso::CBankingRegisterModel::CBankingRegisterModel(QObject* pParent)
 	: QSqlQueryModel(pParent)
 {
 }
 
-void CBankingRegisterModel::setAccount(const int iAccountId)
+void Queso::CBankingRegisterModel::setAccount(const int iAccountId)
 {
     QSqlQuery q;
     q.prepare("SELECT t.Id, t.Date, t.SequenceNum, t.Amount, p.Name, t.Memo, c.Name, t.CheckNumber, t.Reconciled, t.Balance "

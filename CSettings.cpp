@@ -1,69 +1,69 @@
 #include "CSettings.h"
 #include <QtCore/QSettings>
 
-CSettings::CSettings()
+Queso::CSettings::CSettings()
 {
 }
 
-CSettings::~CSettings()
+Queso::CSettings::~CSettings()
 {
 }
 
-QString CSettings::importCSVPath() const
+QString Queso::CSettings::importCSVPath() const
 {
     QSettings oSettings;
     return oSettings.value("FileBrowsers/ImportCSVPath").toString();
 }
 
-void CSettings::setImportCSVPath(const QString& oPath)
+void Queso::CSettings::setImportCSVPath(const QString& oPath)
 {
     QSettings oSettings;
     oSettings.setValue("FileBrowsers/ImportCSVPath", oPath);
 }
 
-QString CSettings::importQIFPath() const
+QString Queso::CSettings::importQIFPath() const
 {
     QSettings oSettings;
     return oSettings.value("FileBrowsers/ImportQIFPath").toString();
 }
 
-void CSettings::setImportQIFPath(const QString& oPath)
+void Queso::CSettings::setImportQIFPath(const QString& oPath)
 {
     QSettings oSettings;
     oSettings.setValue("FileBrowsers/ImportQIFPath", oPath);
 }
 
-QByteArray CSettings::mainWindowGeometry() const
+QByteArray Queso::CSettings::mainWindowGeometry() const
 {
     QSettings oSettings;
     return oSettings.value("App/MainWindow/Geometry").toByteArray();
 }
 
-void CSettings::setMainWindowGeometry(const QByteArray& oGeometry)
+void Queso::CSettings::setMainWindowGeometry(const QByteArray& oGeometry)
 {
     QSettings oSettings;
     oSettings.setValue("App/MainWindow/Geometry", oGeometry);
 }
 
-QByteArray CSettings::mainWindowState() const
+QByteArray Queso::CSettings::mainWindowState() const
 {
     QSettings oSettings;
     return oSettings.value("App/MainWindow/State").toByteArray();
 }
 
-void CSettings::setMainWindowState(const QByteArray& oState)
+void Queso::CSettings::setMainWindowState(const QByteArray& oState)
 {
     QSettings oSettings;
     oSettings.setValue("App/MainWindow/State", oState);
 }
 
-QByteArray CSettings::mainWindowVerticalSplitterState() const
+QByteArray Queso::CSettings::mainWindowVerticalSplitterState() const
 {
     QSettings oSettings;
     return oSettings.value("App/MainWindow/VerticalSplitter/State").toByteArray();
 }
 
-void CSettings::setMainWindowVerticalSplitterState(const QByteArray& oState)
+void Queso::CSettings::setMainWindowVerticalSplitterState(const QByteArray& oState)
 {
     QSettings oSettings;
     oSettings.setValue("App/MainWindow/VerticalSplitter/State", oState);

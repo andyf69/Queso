@@ -3,7 +3,7 @@
 #include <QtSql/QSqlTableModel>
 #include <QtWidgets/QInputDialog>
 
-CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
+Queso::CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
     : QDialog(pParent)
 {
     ui.setupUi(this);
@@ -15,7 +15,7 @@ CPayeeListDlg::CPayeeListDlg(QWidget* pParent)
     initPayeeList(ui.m_pListView);
 }
 
-void CPayeeListDlg::initPayeeList(QListView* pListView)
+void Queso::CPayeeListDlg::initPayeeList(QListView* pListView)
 {
     m_pModel = new QSqlTableModel(this);
     m_pModel->setTable("Payee");
@@ -30,7 +30,7 @@ void CPayeeListDlg::initPayeeList(QListView* pListView)
     QObject::connect(pListView, &QListView::activated, this, &CPayeeListDlg::onPayeeActivated);
 }
 
-void CPayeeListDlg::onPayeeActivated(const QModelIndex& oIndex)
+void Queso::CPayeeListDlg::onPayeeActivated(const QModelIndex& oIndex)
 {
     QString oPayeeName = m_pModel->data(oIndex).toString();
     int iPayeeId = m_pModel->data(oIndex.siblingAtColumn(0)).toInt();
@@ -42,7 +42,7 @@ void CPayeeListDlg::onPayeeActivated(const QModelIndex& oIndex)
     }
 }
 
-void CPayeeListDlg::onEdit()
+void Queso::CPayeeListDlg::onEdit()
 {
     QItemSelectionModel* pSelectionModel = ui.m_pListView->selectionModel();
     if (pSelectionModel->hasSelection())
@@ -60,7 +60,7 @@ void CPayeeListDlg::onEdit()
     }
 }
 
-void CPayeeListDlg::onAdd()
+void Queso::CPayeeListDlg::onAdd()
 {
     QString oNewPayee = QInputDialog::getText(this, "Add Payee", "Payee Name", QLineEdit::Normal).trimmed();
     if (!oNewPayee.isEmpty())
@@ -73,7 +73,7 @@ void CPayeeListDlg::onAdd()
     }
 }
 
-void CPayeeListDlg::onClose()
+void Queso::CPayeeListDlg::onClose()
 {
     close();
 }

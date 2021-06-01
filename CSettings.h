@@ -2,25 +2,27 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
-class CSettings
+namespace Queso
 {
-public:
-	CSettings();
-	~CSettings();
+	class CSettings
+	{
+	public:
+		CSettings();
+		~CSettings();
 
-	QString importCSVPath() const;
-	void setImportCSVPath(const QString& oPath);
+		QString importCSVPath() const;
+		void setImportCSVPath(const QString& oPath);
 
-	QString importQIFPath() const;
-	void setImportQIFPath(const QString& oPath);
+		QString importQIFPath() const;
+		void setImportQIFPath(const QString& oPath);
 
-	QByteArray mainWindowGeometry() const;
-	void setMainWindowGeometry(const QByteArray& oGeometry);
+		QByteArray mainWindowGeometry() const;
+		void setMainWindowGeometry(const QByteArray& oGeometry);
 
-	QByteArray mainWindowState() const;
-	void setMainWindowState(const QByteArray& oState);
+		QByteArray mainWindowState() const;
+		void setMainWindowState(const QByteArray& oState);
 
-	QByteArray mainWindowVerticalSplitterState() const;
-	void setMainWindowVerticalSplitterState(const QByteArray& oState);
-};
-
+		QByteArray mainWindowVerticalSplitterState() const;
+		void setMainWindowVerticalSplitterState(const QByteArray& oState);
+	};
+}

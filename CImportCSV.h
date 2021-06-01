@@ -3,16 +3,18 @@
 #include <vector>
 #include <QtCore/QString>
 
-class CImportCSV
+namespace Queso
 {
-public:
-	CImportCSV();
-	~CImportCSV();
+	class CImportCSV
+	{
+	public:
+		CImportCSV();
+		~CImportCSV();
 
-	bool import(const QString& oFileName);
+		bool import(const QString& oFileName);
 
-private:
-	bool importRow(const std::vector<QString>& row);
-	bool isTransactionImportedAlready(const QString& oTransID);
-};
-
+	private:
+		bool importRow(const std::vector<QString>& row);
+		bool isTransactionImportedAlready(const QString& oTransID);
+	};
+}

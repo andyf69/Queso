@@ -62,15 +62,15 @@ namespace
     }
 }
 
-CImportQIF::CImportQIF()
+Queso::CImportQIF::CImportQIF()
 {
 }
 
-CImportQIF::~CImportQIF()
+Queso::CImportQIF::~CImportQIF()
 {
 }
 
-bool CImportQIF::import(const QString& oFileName)
+bool Queso::CImportQIF::import(const QString& oFileName)
 {
     QIFState eState = QIFState::Undefined;
     m_uLineNo = 0;
@@ -132,7 +132,7 @@ bool CImportQIF::import(const QString& oFileName)
     return true;
 }
 
-void CImportQIF::readBankAccountLine(const QString& oLine)
+void Queso::CImportQIF::readBankAccountLine(const QString& oLine)
 {
     static BankTransaction* s_pBankTransaction = nullptr;
     static SplitLine s_oSplit;
@@ -186,7 +186,7 @@ void CImportQIF::readBankAccountLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readCashAccountLine(const QString& oLine)
+void Queso::CImportQIF::readCashAccountLine(const QString& oLine)
 {
     static CashTransaction* s_pCashTransaction = nullptr;
     static SplitLine s_oSplit;
@@ -240,7 +240,7 @@ void CImportQIF::readCashAccountLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readCreditCardAccountLine(const QString& oLine)
+void Queso::CImportQIF::readCreditCardAccountLine(const QString& oLine)
 {
     static CCardTransaction* s_pCCardTransaction = nullptr;
     static SplitLine s_oSplit;
@@ -297,7 +297,7 @@ void CImportQIF::readCreditCardAccountLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readInvestmentAccountLine(const QString& oLine)
+void Queso::CImportQIF::readInvestmentAccountLine(const QString& oLine)
 {
     static InvestmentTransaction* s_pInvestmentTransaction = nullptr;
     if (!s_pInvestmentTransaction)
@@ -350,7 +350,7 @@ void CImportQIF::readInvestmentAccountLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readOtherAssetAccountLine(const QString & oLine)
+void Queso::CImportQIF::readOtherAssetAccountLine(const QString & oLine)
 {
     static OtherAssetTransaction* s_pOtherAssetTransaction = nullptr;
     if (!s_pOtherAssetTransaction)
@@ -388,7 +388,7 @@ void CImportQIF::readOtherAssetAccountLine(const QString & oLine)
     }
 }
 
-void CImportQIF::readOtherLiabilityAccountLine(const QString & oLine)
+void Queso::CImportQIF::readOtherLiabilityAccountLine(const QString & oLine)
 {
     static OtherLiabilityTransaction* s_pOtherLiabilityTransaction = nullptr;
     static SplitLine s_oSplit;
@@ -439,7 +439,7 @@ void CImportQIF::readOtherLiabilityAccountLine(const QString & oLine)
     }
 }
 
-void CImportQIF::readAccountListLine(const QString & oLine)
+void Queso::CImportQIF::readAccountListLine(const QString & oLine)
 {
     static Account* s_pAccount = nullptr;
     if (!s_pAccount)
@@ -474,7 +474,7 @@ void CImportQIF::readAccountListLine(const QString & oLine)
     }
 }
 
-void CImportQIF::readCategoryListLine(const QString& oLine)
+void Queso::CImportQIF::readCategoryListLine(const QString& oLine)
 {
     static Category* s_pCategory = nullptr;
     if (!s_pCategory)
@@ -512,7 +512,7 @@ void CImportQIF::readCategoryListLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readClassListLine(const QString& oLine)
+void Queso::CImportQIF::readClassListLine(const QString& oLine)
 {
     static Class* s_pClass = nullptr;
     if (!s_pClass)
@@ -535,7 +535,7 @@ void CImportQIF::readClassListLine(const QString& oLine)
     }
 }
 
-void CImportQIF::readMemorizedListLine(const QString& oLine)
+void Queso::CImportQIF::readMemorizedListLine(const QString& oLine)
 {
     static Memorized* s_pMemorized = nullptr;
     static SplitLine s_oSplit;

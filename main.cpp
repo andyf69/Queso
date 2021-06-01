@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     }
     db.setNumericalPrecisionPolicy(QSql::HighPrecision);
 
-    CMainWindow w;
+    Queso::CMainWindow w;
     w.show();
     return a.exec();
 }

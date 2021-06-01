@@ -6,73 +6,76 @@
 #include <QtCore/QVariant>
 #include <QtSql/QSqlQuery>
 
-CImportCSV::CImportCSV()
+Queso::CImportCSV::CImportCSV()
 {
 }
 
-CImportCSV::~CImportCSV()
+Queso::CImportCSV::~CImportCSV()
 {
 }
 
-static bool read_csv_row(QTextStream& in, std::vector<QString>* pRowData)
+namespace
 {
-    // https://stackoverflow.com/a/40229435
-    static const int delta[][5] = {
-        //  ,    "   \n    ?  eof
-        {   1,   2,  -1,   0,  -1  }, // 0: parsing (store char)
-        {   1,   2,  -1,   0,  -1  }, // 1: parsing (store column)
-        {   3,   4,   3,   3,  -2  }, // 2: quote entered (no-op)
-        {   3,   4,   3,   3,  -2  }, // 3: parsing inside quotes (store char)
-        {   1,   3,  -1,   0,  -1  }, // 4: quote exited (no-op)
-        // -1: end of row, store column, success
-        // -2: eof inside quotes
-    };
-
-    pRowData->clear();
-
-    if (in.atEnd())
-        return false;
-
-    int state = 0, t;
-    char ch;
-    QString cell;
-
-    while (state >= 0)
+    static bool read_csv_row(QTextStream& in, std::vector<QString>* pRowData)
     {
+        // https://stackoverflow.com/a/40229435
+        static const int delta[][5] = {
+            //  ,    "   \n    ?  eof
+            {   1,   2,  -1,   0,  -1  }, // 0: parsing (store char)
+            {   1,   2,  -1,   0,  -1  }, // 1: parsing (store column)
+            {   3,   4,   3,   3,  -2  }, // 2: quote entered (no-op)
+            {   3,   4,   3,   3,  -2  }, // 3: parsing inside quotes (store char)
+            {   1,   3,  -1,   0,  -1  }, // 4: quote exited (no-op)
+            // -1: end of row, store column, success
+            // -2: eof inside quotes
+        };
+
+        pRowData->clear();
+
         if (in.atEnd())
-            t = 4;
-        else
+            return false;
+
+        int state = 0, t;
+        char ch;
+        QString cell;
+
+        while (state >= 0)
         {
-            in >> ch;
-            if (ch == ',') t = 0;
-            else if (ch == '\"') t = 1;
-            else if (ch == '\n') t = 2;
-            else t = 3;
+            if (in.atEnd())
+                t = 4;
+            else
+            {
+                in >> ch;
+                if (ch == ',') t = 0;
+                else if (ch == '\"') t = 1;
+                else if (ch == '\n') t = 2;
+                else t = 3;
+            }
+
+            state = delta[state][t];
+
+            switch (state)
+            {
+            case 0:
+            case 3:
+                cell += ch;
+                break;
+            case -1:
+            case 1:
+                pRowData->push_back(cell);
+                cell = "";
+                break;
+            }
         }
 
-        state = delta[state][t];
+        if (state == -2)
+            return false; // throw runtime_error("End-of-file found while inside quotes.");
 
-        switch (state)
-        {
-        case 0:
-        case 3:
-            cell += ch;
-            break;
-        case -1:
-        case 1:
-            pRowData->push_back(cell);
-            cell = "";
-            break;
-        }
+        return true;
     }
-
-    if (state == -2)
-        return false; // throw runtime_error("End-of-file found while inside quotes.");
-
-    return true;
 }
 
-bool CImportCSV::import(const QString& oFileName)
+bool Queso::CImportCSV::import(const QString& oFileName)
 {
     QFile csv(oFileName);
     if (!csv.open(QFile::ReadOnly | QFile::Text))
@@ -93,7 +96,7 @@ bool CImportCSV::import(const QString& oFileName)
     return true;
 }
 
-bool CImportCSV::importRow(const std::vector<QString>& row)
+bool Queso::CImportCSV::importRow(const std::vector<QString>& row)
 {
     if (row.size() != 13)
         return false;
@@ -167,7 +170,7 @@ bool CImportCSV::importRow(const std::vector<QString>& row)
     return true;
 }
 
-bool CImportCSV::isTransactionImportedAlready(const QString& oTransactionID)
+bool Queso::CImportCSV::isTransactionImportedAlready(const QString& oTransactionID)
 {
     QSqlQuery q;
     q.prepare("SELECT Id FROM FITransaction WHERE TransactionId = :transid");
